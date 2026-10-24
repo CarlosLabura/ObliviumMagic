@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerSpell : MonoBehaviour
 {
     public SpellType CurrentSpell = SpellType.Fist;
+    
     [SerializeField] private GameObject Hitboxes; //uso esto para el pivote este en el centro del jugador
     [SerializeField] private GameObject FistHitbox;
     [SerializeField] private GameObject Projectile;
@@ -37,7 +38,7 @@ public class PlayerSpell : MonoBehaviour
         Hitboxes.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
 
         // lo que pasa al clikear, se aca se activan las hitbox y se tiran los proyectiles
-        if (Cooldown <= 0){
+        if (Cooldown <= 0 && !GetComponent<PlayerMovement>().Stunned){
             FistHitbox.SetActive(false);
             if (Input.GetMouseButton(0))
             {   
