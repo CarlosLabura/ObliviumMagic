@@ -11,10 +11,11 @@ public class HealthSystem : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (gameObject.CompareTag("Enemy"))
+        if (gameObject.CompareTag("Enemy")) //que pasa si un enemigo recibe daño
         {
             if (other.gameObject.GetComponent<SpellTypeScript>().Type == Weakness) // si el tipo de hechizo recivdo por el trigger es igual a la debilidad del enemigo
             {
+                // lo que pasa al un objeto recibir daño de una hitbox o un proyectil
                 switch (other.gameObject.GetComponent<SpellTypeScript>().Type)
                 {
                     case SpellType.Fist:
@@ -38,6 +39,7 @@ public class HealthSystem : MonoBehaviour
             }
             else
             {
+                // si la hitbox no corresponde con la debilidad pero es un golpe q saque uno de vida
                 if (other.gameObject.GetComponent<SpellTypeScript>().Type == SpellType.Fist)
                 {
                     Health -= 1;

@@ -19,6 +19,7 @@ public class PlayerSpell : MonoBehaviour
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         Hitboxes.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
 
+        // lo que pasa al clikear, se aca se activan las hitbox y se tiran los proyectiles
         if (Cooldown <= 0){
             FistHitbox.SetActive(false);
             if (Input.GetMouseButton(0))
