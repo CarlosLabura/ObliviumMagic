@@ -1,10 +1,6 @@
-public enum SpellType
+using UnityEngine;
+public enum SpellType {Fist, Rock, Fire, Ice, Electricty, None}
+public class SpellTypeScript : MonoBehaviour
 {
-    Fist,
-    Rock,
-    Fire,
-    Ice,
-    Electricty,
-    None
-
+    public SpellType Type;
 }

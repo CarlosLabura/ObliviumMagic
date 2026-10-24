@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerSpell : MonoBehaviour
 {
+    public SpellType CurrentSpell = SpellType.Fist;
     [SerializeField] private GameObject Hitboxes;
     void Update()
     {
