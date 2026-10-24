@@ -7,10 +7,6 @@ public class HealthSystem : MonoBehaviour
     public SpellType Weakness;
     public int FireDamage = 1;
     private float FireTimer = 0;
-
-    //public int MaxShield = 0;
-    //public int Shield = 0;
-
     private int FireTicks = 0;
     public void Fire(int Ticks)
     {
@@ -26,6 +22,7 @@ public class HealthSystem : MonoBehaviour
             {
                 FireTicks -= 1;
                 FireTimer = 1f;
+                Health -= FireDamage;
             }
         }
     }
