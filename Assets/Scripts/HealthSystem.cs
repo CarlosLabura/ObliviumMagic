@@ -10,7 +10,7 @@ public class HealthSystem : MonoBehaviour
     private int FireTicks = 0;
     public void Fire(int Ticks)
     {
-        FireTicks = Ticks;
+        FireTicks += Ticks;
         FireTimer = 1f;
     }
     void Update()
@@ -29,6 +29,7 @@ public class HealthSystem : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         // si el enemigo recibe un trigger de la hitbox del player or el player recibe hitbox de un enemigo
+        Debug.Log(other.gameObject.CompareTag("PlayerHitbox"));
         if (gameObject.CompareTag("Enemy") && other.gameObject.CompareTag("PlayerHitbox") 
         || gameObject.CompareTag("Player") && other.gameObject.CompareTag("EnemyHitbox"))
         {
@@ -43,23 +44,19 @@ public class HealthSystem : MonoBehaviour
                         break;
                     case SpellType.Rock:
                         Health -= 10;
-                        Destroy(other.gameObject);
                         break;
                     case SpellType.Fire:
                         Health -= 8;
                         Fire(3);
-                        Destroy(other.gameObject);
                         break;
                     case SpellType.Ice:
                         Health -= 10;
                         GetComponent<PlayerMovement>().Freeze(3f);
-                        Destroy(other.gameObject);
                         break;
                     case SpellType.Electricty:
                         Health -= 10;
                         GetComponent<PlayerMovement>().Stun(1f);
                         //generar otro rayo o algo i dunno
-                        Destroy(other.gameObject);
                         break;
                     default:
                         break;
