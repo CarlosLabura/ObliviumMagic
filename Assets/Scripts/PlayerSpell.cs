@@ -8,6 +8,19 @@ public class PlayerSpell : MonoBehaviour
     [SerializeField] private GameObject FistHitbox;
     [SerializeField] private GameObject Projectile;
     private float Cooldown = 0;
+
+    void Shoot(SpellType Type, float Speed, Vector3 Scale)
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
+
+        GameObject projectile = Instantiate(Projectile, gameObject.GetComponent<Transform>().position, Quaternion.identity);
+        projectile.GetComponent<SpellTypeScript>().Type = Type;
+        projectile.transform.localScale = Scale;
+        Vector2 projectileDirection = (mousePosition - transform.position).normalized;
+        projectile.GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg;
+        projectile.GetComponent<Rigidbody2D>().AddForce(projectileDirection * Speed, ForceMode2D.Impulse);
+    }
     void Update()
     {
         if (Cooldown > 0) {
@@ -27,14 +40,7 @@ public class PlayerSpell : MonoBehaviour
         if (Cooldown <= 0){
             FistHitbox.SetActive(false);
             if (Input.GetMouseButton(0))
-            {
-                GameObject projectile = Instantiate(Projectile, gameObject.GetComponent<Transform>().position, Quaternion.identity);
-                Vector2 projectileDirection = (mousePosition - transform.position).normalized;
-                float Speed = 10f;
-
-                projectile.GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg;
-                projectile.GetComponent<Rigidbody2D>().AddForce(projectileDirection * Speed, ForceMode2D.Impulse);
-                
+            {   
                 switch (CurrentSpell)
                 {
                     case SpellType.Fist:
@@ -42,12 +48,20 @@ public class PlayerSpell : MonoBehaviour
                         Cooldown = 0.5f; 
                         break;
                     case SpellType.Rock:
+                        Shoot(SpellType.Rock, 10f, new Vector3(0.9f,0.7f,0.7f));
+                        Cooldown = 1f;
                         break;
                     case SpellType.Fire:
+                        Shoot(SpellType.Fire, 15f, new Vector3(1f,0.5f,0.5f));
+                        Cooldown = 1.5f;
                         break;
                     case SpellType.Ice:
+                        Shoot(SpellType.Ice, 12f, new Vector3(0.7f,0.7f,0.7f));
+                        Cooldown = 2f;
                         break;
                     case SpellType.Electricty:
+                        Shoot(SpellType.Electricty, 20f, new Vector3(0.9f,0.4f,0.4f));
+                        Cooldown = 2.5f;
                         break;
                     default:
                         break;
