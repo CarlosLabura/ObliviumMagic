@@ -5,9 +5,14 @@ public class HealthSystem : MonoBehaviour
     public int MaxHealth = 50;
     public int Health = 50;
     public SpellType Weakness;
-    public int FireDamage = 1;
+    private int FireDamage = 1;
     private float FireTimer = 0;
     private int FireTicks = 0;
+    private PlayerMovement PlayerMovement;
+    void Start()
+    {
+        PlayerMovement = GetComponent<PlayerMovement>();
+    }
     public void Fire(int Ticks)
     {
         FireTicks += Ticks;
@@ -26,7 +31,6 @@ public class HealthSystem : MonoBehaviour
             }
         }
     }
-
     void OnTriggerEnter2D(Collider2D other) {
         // si el enemigo recibe un trigger de la hitbox del player or el player recibe hitbox de un enemigo
         Debug.Log(other.gameObject.CompareTag("PlayerHitbox"));
@@ -51,11 +55,11 @@ public class HealthSystem : MonoBehaviour
                         break;
                     case SpellType.Ice:
                         Health -= 10;
-                        GetComponent<PlayerMovement>().Freeze(3f);
+                        PlayerMovement.Freeze(3f);
                         break;
                     case SpellType.Electricty:
                         Health -= 10;
-                        GetComponent<PlayerMovement>().Stun(1f);
+                        PlayerMovement.Stun(1f);
                         //generar otro rayo o algo i dunno
                         break;
                     default:
@@ -66,9 +70,7 @@ public class HealthSystem : MonoBehaviour
             {
                 // si la hitbox no corresponde con la debilidad pero es un golpe q saque uno de vida
                 if (other.gameObject.GetComponent<SpellTypeScript>().Type == SpellType.Fist)
-                {
                     Health -= 1;
-                }
             }
         }
     }

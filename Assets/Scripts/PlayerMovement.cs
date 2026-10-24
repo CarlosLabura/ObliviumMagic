@@ -6,14 +6,14 @@ public class PlayerMovement : MonoBehaviour
     public float CrouchMultiplier = 0.5f;
     public bool Freezed = false;
     public bool Stunned = false;
-    private Rigidbody2D rb;
+    private Rigidbody2D RigidBody2D;
     private Vector2 MoveVector;
     private float ActualSpeed;
     private float FreezeTimer = 0;
     private float StunTimer = 0;
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); 
+        RigidBody2D = GetComponent<Rigidbody2D>(); 
     }
     public void Freeze(float Time)
     {
@@ -54,6 +54,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.linearVelocity = MoveVector * ActualSpeed;
+        RigidBody2D.linearVelocity = MoveVector * ActualSpeed;
     }
 }

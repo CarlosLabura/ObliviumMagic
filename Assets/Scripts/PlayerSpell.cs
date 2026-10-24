@@ -9,7 +9,7 @@ public class PlayerSpell : MonoBehaviour
     [SerializeField] private GameObject FistHitbox;
     [SerializeField] private GameObject Projectile;
     private float Cooldown = 0;
-
+    private PlayerMovement PlayerMovement;
     void Shoot(SpellType Type, float Speed, Vector3 Scale)
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -22,11 +22,14 @@ public class PlayerSpell : MonoBehaviour
         projectile.GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg;
         projectile.GetComponent<Rigidbody2D>().AddForce(projectileDirection * Speed, ForceMode2D.Impulse);
     }
+    void Start()
+    {
+        PlayerMovement = GetComponent<PlayerMovement>();
+    }
     void Update()
     {
-        if (Cooldown > 0) {
+        if (Cooldown > 0) 
             Cooldown -= Time.deltaTime;
-        }
 
         // hitboxes fijas apuntan al mouse
         Hitboxes.transform.position = transform.position;
@@ -38,7 +41,7 @@ public class PlayerSpell : MonoBehaviour
         Hitboxes.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
 
         // lo que pasa al clikear, se aca se activan las hitbox y se tiran los proyectiles
-        if (Cooldown <= 0 && !GetComponent<PlayerMovement>().Stunned){
+        if (Cooldown <= 0 && !PlayerMovement.Stunned){
             FistHitbox.SetActive(false);
             if (Input.GetMouseButton(0))
             {   
@@ -69,8 +72,6 @@ public class PlayerSpell : MonoBehaviour
                 }
             }
         }
-
-
         // cambio de hechizos
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
         {
