@@ -1,16 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerSpell : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    [SerializeField] private GameObject Hitboxes;
     void Update()
     {
-        
+        Hitboxes.transform.position = transform.position;
+
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Hitboxes.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
     }
 }
