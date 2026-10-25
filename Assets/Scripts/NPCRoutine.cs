@@ -49,6 +49,7 @@ public class NPCRoutine : MonoBehaviour
             return;
         }
         SpellSystem.CastSpell(SpellSystem.CurrentSpell, target);
+        Rotate(target);
     }
     void Update()
     {
