@@ -14,6 +14,7 @@ public class SpellTypeScript : MonoBehaviour { public SpellType Type; }
         (es importante añadir cooldown tras hacerlo)
     3. añadir una tecla bindeable con SpellChange()
     4. En HealthSystem.cs se encuentra la logica al entrar en contacto con la colision del hechizo
-        - esa logica solo se va a aplicar si el enemigo es debil a el hechizo, o si no es debil a ninguno (ser debil a ninguno significa ser debil a TODOS)
+        - esa logica solo se va a aplicar si el enemigo es debil a el hechizo (ser debil a ninguno (None) significa ser debil a TODOS)
+        - no hace falta destruir el hechizo al impactar, ya que su logica de destruccion esta automaticamente programada en ProjectileCollision.cs
 
 */
