@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerSpell : MonoBehaviour
+public class PlayerSpells : MonoBehaviour
 {
     //hechizos
     public SpellType CurrentSpell = SpellType.Fist;
