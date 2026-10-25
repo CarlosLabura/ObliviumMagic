@@ -18,11 +18,11 @@ public class SpellTypeScript : MonoBehaviour {
     4. En HealthSystem.cs se encuentra la logica al entrar en contacto con la colision del hechizo
         - esa logica solo se va a aplicar si el enemigo es debil a el hechizo (ser debil a ninguno (None) significa ser debil a TODOS)
         - no hace falta destruir el hechizo al impactar, ya que su logica de destruccion esta automaticamente programada en ProjectileCollision.cs
+    5. Recorda añadirlo a los hechizos desbloqueados en el inspector si queres que sea usado por el jugador
 
 */
 /*
     TODO: (aca pq este script no tiene otro uso)
-    - añadir desbloqueo de hechizos en vez de que solo esten todos desbloqueados
     - parry al golpear un proyectil
     - game over
     - generar otro rayo al impactar con un enemigo
