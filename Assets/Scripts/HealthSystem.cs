@@ -103,7 +103,6 @@ public class HealthSystem : MonoBehaviour
                     case SpellType.Electricty:
                         Damage(10);
                         MovementSystem.Stun(1f);
-                        //generar otro rayo o algo i dunno
                         break;
                     default:
                         break;

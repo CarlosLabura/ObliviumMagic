@@ -18,3 +18,12 @@ public class SpellTypeScript : MonoBehaviour { public SpellType Type; }
         - no hace falta destruir el hechizo al impactar, ya que su logica de destruccion esta automaticamente programada en ProjectileCollision.cs
 
 */
+/*
+    TODO: (aca pq este script no tiene otro uso)
+    - ia para los enemigos (pathfinding, disparar)
+    - añadir desbloqueo de hechizos en vez de que solo esten todos desbloqueados
+    - parry al golpear un proyectil
+    - generar otro rayo al impactar con un enemigo
+    - feedback para toda la semana
+
+*/
