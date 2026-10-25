@@ -27,6 +27,12 @@ public class NPCRoutine : MonoBehaviour
         Vector2 diff = position - RigidBody2D.position;
         float dist = diff.magnitude;
 
+        if (dist >= Sight)
+        {
+            MovementSystem.MoveVector = Vector2.zero;
+            State = NPCState.Patrol;
+            return;
+        }
         if (dist <= Distance)
         {
             MovementSystem.MoveVector = Vector2.zero;
@@ -51,6 +57,17 @@ public class NPCRoutine : MonoBehaviour
         SpellSystem.CastSpell(SpellSystem.CurrentSpell, target);
         Rotate(target);
     }
+    private void Patrol(Vector2 position) // privada porque es mas como un idle que otra cosa
+    {
+        Vector2 diff = position - RigidBody2D.position;
+        float dist = diff.magnitude;
+
+        if (dist < Sight)
+        {
+            State = NPCState.Following;
+            return;
+        }
+    }
     void Update()
     {
         if (State == NPCState.Following)
@@ -63,7 +80,7 @@ public class NPCRoutine : MonoBehaviour
         } 
         else if (State == NPCState.Patrol)
         {
-            
+            Patrol(Player.position);
         }
     }
 }
