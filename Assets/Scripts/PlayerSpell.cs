@@ -75,6 +75,7 @@ public class PlayerSpell : MonoBehaviour
             }
         }
         // cambio de hechizos
+        //añadir desbloqueo de hechizos en vez de que solo esten todos desbloqueados
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
         {
             CurrentSpell += 1;

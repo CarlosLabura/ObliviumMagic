@@ -11,6 +11,7 @@ public class HealthSystem : MonoBehaviour
     private float FireTimer = 0;
     private int FireTicks = 0;
     // invencibilidad
+    // consultar que es un estado en MovementSystem.cs
     [HideInInspector] public bool InvencibleState = false;
     private float InvencibleTime = 0f;
     // variables internas
@@ -36,6 +37,7 @@ public class HealthSystem : MonoBehaviour
             // game over
             return;
         }
+        //empujon al recibir daño
         if (MovementSystem.Player)
             Invencible(1);
     }
