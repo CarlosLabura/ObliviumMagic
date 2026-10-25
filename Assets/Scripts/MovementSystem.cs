@@ -6,7 +6,7 @@ public class MovementSystem : MonoBehaviour
     // velocidad
     public float Speed = 1f;
     private float CrouchMultiplier = 0.5f;
-    private Vector2 MoveVector;
+    [HideInInspector] public Vector2 MoveVector;
     private float ActualSpeed;
     // estados
     /* 
