@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerSpell : MonoBehaviour
 {
     public SpellType CurrentSpell = SpellType.Fist;
-    
+    public float SpellCooldown = 1.38f;
     [SerializeField] private GameObject Hitboxes; //uso esto para el pivote este en el centro del jugador
     [SerializeField] private GameObject FistHitbox;
     [SerializeField] private GameObject Projectile;
@@ -49,23 +49,23 @@ public class PlayerSpell : MonoBehaviour
                 {
                     case SpellType.Fist:
                         FistHitbox.SetActive(true);
-                        Cooldown = 0.5f; 
+                        Cooldown = SpellCooldown/3; 
                         break;
                     case SpellType.Rock:
                         Shoot(SpellType.Rock, 10f, new Vector3(0.9f,0.7f,0.7f));
-                        Cooldown = 1f;
+                        Cooldown = SpellCooldown; //por decision popular todos los hechizos van a tener el mismo cooldown
                         break;
                     case SpellType.Fire:
                         Shoot(SpellType.Fire, 15f, new Vector3(1f,0.5f,0.5f));
-                        Cooldown = 1.5f;
+                        Cooldown = SpellCooldown; //por comodidad lo voy a dejar asi por si dsp lo quieren cambiar
                         break;
                     case SpellType.Ice:
                         Shoot(SpellType.Ice, 12f, new Vector3(0.7f,0.7f,0.7f));
-                        Cooldown = 2f;
+                        Cooldown = SpellCooldown;
                         break;
                     case SpellType.Electricty:
                         Shoot(SpellType.Electricty, 20f, new Vector3(0.9f,0.4f,0.4f));
-                        Cooldown = 2.5f;
+                        Cooldown = SpellCooldown;
                         break;
                     default:
                         break;
