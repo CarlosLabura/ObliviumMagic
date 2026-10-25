@@ -2406,6 +2406,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCRoutine
   State: 1
+  Distance: 5
+  Sight: 0
   Player: {fileID: 672573450}
 --- !u!114 &1938667381
 MonoBehaviour:

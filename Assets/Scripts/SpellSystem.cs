@@ -9,9 +9,9 @@ public class SpellSystem : MonoBehaviour
     public float SpellCooldown = 1.38f;
     private float Cooldown = 0;
     //variables internas
+    [SerializeField] private GameObject Projectile;
     [SerializeField] private Transform Hitboxes; //uso esto para el pivote este en el centro del jugador
     [SerializeField] private GameObject FistHitbox;
-    [SerializeField] private GameObject Projectile;
     private MovementSystem MovementSystem;
     [SerializeField] private TextMeshProUGUI SpellUI; //temporal
     void Start()

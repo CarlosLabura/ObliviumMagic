@@ -36,7 +36,7 @@ public class HealthSystem : MonoBehaviour
         Health -= Amount;
         if (Health <= 0)
         {
-            // game over
+            Destroy(gameObject);
             return;
         }
         //empujon al recibir daño
@@ -116,7 +116,7 @@ public class HealthSystem : MonoBehaviour
             {
                 // si la hitbox no corresponde con la debilidad pero es un golpe q saque uno de vida
                 if (other.gameObject.GetComponent<SpellTypeScript>().Type == SpellType.Fist)
-                    Health -= 1;
+                    Damage(1);
             }
         }
     }
