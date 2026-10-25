@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class SpellSystem : MonoBehaviour
     public SpellType CurrentSpell = SpellType.Fist;
     public float SpellCooldown = 1.38f;
     private float Cooldown = 0;
+    public SpellType[] UnlockedSpells = {SpellType.Fist};
+    private int SpellCycle = 1; //empieza en uno para hacer que no se elijan los fist
     //variables internas
     [SerializeField] private GameObject Projectile;
     [SerializeField] private Transform Hitboxes; //uso esto para el pivote este en el centro del jugador
@@ -87,35 +90,43 @@ public class SpellSystem : MonoBehaviour
             CastSpell(CurrentSpell, mousePosition);
         }
 
+        if (UnlockedSpells.Length <= 1)
+            return;
+
         // cambio de hechizos
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            CurrentSpell = SpellType.Fist;
-            SpellUI.SetText(CurrentSpell.ToString());
+            ChangeSpell(SpellType.Fist);
         }
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
         {
-            CurrentSpell += 1;
-            if (CurrentSpell == SpellType.None)
-                CurrentSpell = SpellType.Rock;
-
-            SpellUI.SetText(CurrentSpell.ToString());
+            SpellCycle += 1;
+            if (SpellCycle >= UnlockedSpells.Length)
+                SpellCycle = 1;
+            ChangeSpell(UnlockedSpells[SpellCycle]);
         } 
-        SpellChange(SpellType.Rock, KeyCode.Alpha1);
-        SpellChange(SpellType.Fire, KeyCode.Alpha2);
-        SpellChange(SpellType.Ice, KeyCode.Alpha3);
-        SpellChange(SpellType.Ray, KeyCode.Alpha4);
+        SpellKeybind(SpellType.Rock, KeyCode.Alpha1);
+        SpellKeybind(SpellType.Fire, KeyCode.Alpha2);
+        SpellKeybind(SpellType.Ice, KeyCode.Alpha3);
+        SpellKeybind(SpellType.Ray, KeyCode.Alpha4);
     }
-    private void SpellChange(SpellType Type, KeyCode Keybind)
+    private void ChangeSpell(SpellType Spell)
+    {
+        if (UnlockedSpells.Contains(Spell))
+            CurrentSpell = Spell;
+        else
+            CurrentSpell = UnlockedSpells[0];
+        
+        SpellUI.SetText(CurrentSpell.ToString());
+    }
+    private void SpellKeybind(SpellType Type, KeyCode Keybind)
     {
         if (Input.GetKeyDown(Keybind))
         {
             if (CurrentSpell == Type)
-                CurrentSpell = SpellType.Fist;
+                ChangeSpell(SpellType.Fist);
             else
-                CurrentSpell = Type;
-            
-            SpellUI.SetText(CurrentSpell.ToString());
+                ChangeSpell(Type);
         }
     }
 }
