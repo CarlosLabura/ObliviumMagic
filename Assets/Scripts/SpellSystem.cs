@@ -20,9 +20,6 @@ public class SpellSystem : MonoBehaviour
     }
     private void Spell(SpellType Type, float Speed, Vector3 Scale, Vector3 Target) //mousePosition
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f;
-
         GameObject projectile = Instantiate(Projectile, transform.position, Quaternion.identity);
         projectile.GetComponent<SpellTypeScript>().Type = Type;
         projectile.transform.localScale = Scale;
@@ -108,7 +105,6 @@ public class SpellSystem : MonoBehaviour
         SpellChange(SpellType.Fire, KeyCode.Alpha2);
         SpellChange(SpellType.Ice, KeyCode.Alpha3);
         SpellChange(SpellType.Ray, KeyCode.Alpha4);
-        
     }
     private void SpellChange(SpellType Type, KeyCode Keybind)
     {
