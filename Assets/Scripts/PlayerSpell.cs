@@ -10,7 +10,7 @@ public class PlayerSpell : MonoBehaviour
     [SerializeField] private GameObject Projectile;
     private float Cooldown = 0;
     private PlayerMovement PlayerMovement;
-    void Shoot(SpellType Type, float Speed, Vector3 Scale)
+    public void Shoot(SpellType Type, float Speed, Vector3 Scale)
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
@@ -84,7 +84,7 @@ public class PlayerSpell : MonoBehaviour
         SpellChange(SpellType.Ice, KeyCode.Alpha3);
         SpellChange(SpellType.Electricty, KeyCode.Alpha4);
     }
-    void SpellChange(SpellType Type, KeyCode Keybind)
+    private void SpellChange(SpellType Type, KeyCode Keybind)
     {
         if (Input.GetKeyDown(Keybind))
         {

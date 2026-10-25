@@ -13,6 +13,14 @@ public class HealthSystem : MonoBehaviour
     {
         PlayerMovement = GetComponent<PlayerMovement>();
     }
+    public void Damage(int Amount)
+    {
+        Health -= Amount;
+        if (Health <= 0)
+        {
+            // game over
+        }
+    }
     public void Fire(int Ticks)
     {
         FireTicks += Ticks;
@@ -27,7 +35,7 @@ public class HealthSystem : MonoBehaviour
             {
                 FireTicks -= 1;
                 FireTimer = 1f;
-                Health -= FireDamage;
+                Damage(FireDamage);
             }
         }
     }
@@ -44,21 +52,21 @@ public class HealthSystem : MonoBehaviour
                 switch (other.gameObject.GetComponent<SpellTypeScript>().Type)
                 {
                     case SpellType.Fist:
-                        Health -= 10;
+                        Damage(10);
                         break;
                     case SpellType.Rock:
-                        Health -= 10;
+                        Damage(10);
                         break;
                     case SpellType.Fire:
-                        Health -= 8;
+                        Damage(8);
                         Fire(3);
                         break;
                     case SpellType.Ice:
-                        Health -= 10;
+                        Damage(10);
                         PlayerMovement.Freeze(3f);
                         break;
                     case SpellType.Electricty:
-                        Health -= 10;
+                        Damage(10);
                         PlayerMovement.Stun(1f);
                         //generar otro rayo o algo i dunno
                         break;
@@ -73,5 +81,10 @@ public class HealthSystem : MonoBehaviour
                     Health -= 1;
             }
         }
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (gameObject.CompareTag("Player") && collision.gameObject.CompareTag("Enemy"))
+            Damage(10);
     }
 }
