@@ -788,6 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 940f4a07c401355419a20434a17d16ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
+  Player: 1
   Speed: 5
   Freezed: 0
   Stunned: 0
@@ -961,6 +962,7 @@ MonoBehaviour:
   MaxHealth: 50
   Health: 50
   Weakness: 5
+  InvencibleState: 0
 --- !u!1 &691906633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,6 +1634,7 @@ MonoBehaviour:
   MaxHealth: 50
   Health: 50
   Weakness: 0
+  InvencibleState: 0
 --- !u!58 &1938667375
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1778,12 +1781,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1938667373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fa3976189ca55348bdb4ac9aced77e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 940f4a07c401355419a20434a17d16ff, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCMovement
+  m_EditorClassIdentifier: Assembly-CSharp::MovementSystem
+  Player: 0
   Speed: 1
   Freezed: 0
   Stunned: 0
+  CameraSensivility: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

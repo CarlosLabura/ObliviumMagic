@@ -34,6 +34,7 @@ public class HealthSystem : MonoBehaviour
         if (Health <= 0)
         {
             // game over
+            return;
         }
         if (MovementSystem.Player)
             Invencible(1);
