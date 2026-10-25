@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpell
   CurrentSpell: 0
   SpellCooldown: 0.7
-  Hitboxes: {fileID: 691906633}
+  Hitboxes: {fileID: 691906634}
   FistHitbox: {fileID: 1555521953}
   Projectile: {fileID: 5738630424762621211, guid: 4d3a6bc55972400449163462af3931bc, type: 3}
   SpellUI: {fileID: 2051933159}

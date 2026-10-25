@@ -9,7 +9,7 @@ public class PlayerSpells : MonoBehaviour
     public float SpellCooldown = 1.38f;
     private float Cooldown = 0;
     //variables internas
-    [SerializeField] private GameObject Hitboxes; //uso esto para el pivote este en el centro del jugador
+    [SerializeField] private Transform Hitboxes; //uso esto para el pivote este en el centro del jugador
     [SerializeField] private GameObject FistHitbox;
     [SerializeField] private GameObject Projectile;
     private MovementSystem MovementSystem;
@@ -36,13 +36,13 @@ public class PlayerSpells : MonoBehaviour
             Cooldown -= Time.deltaTime;
 
         // hitboxes fijas apuntan al mouse
-        Hitboxes.transform.position = transform.position;
+        Hitboxes.position = transform.position;
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
         
         Vector2 direction = mousePosition - transform.position;
-        Hitboxes.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
+        Hitboxes.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
 
         // lo que pasa al clikear, se aca se activan las hitbox y se tiran los proyectiles
         if (Cooldown <= 0 && !MovementSystem.Stunned){
