@@ -9,9 +9,9 @@ public class SpellTypeScript : MonoBehaviour {
     1. Añadir a SpellType su nombre clave 
         ("None" tiene que ser siempre el ultimo elemento, ya que en la seleccion manual se usa como ultimo elemento para volver al primero)
         (si no es el ultimo, tu hechizo nunca se va a poder seleccionar en la rueda de hechizos)
-    2. En PlayerSpell.cs dentro de Update() esta la logica para cuando se castea el hechizo al apretar click
+    2. En SpellSystem.cs en CastSpell() esta la logica para cuando se castea el hechizo
         - Puede ser una hitbox (como fist, una hitbox que spawnea y despawnea tras del cooldown)
-        - un projectil de hechizo hecho con Shoot() (no es mas que una colision como el fist pero disparada con AddForce())
+        - un projectil de hechizo hecho con Spell() (no es mas que una colision como el fist pero disparada con AddForce())
         - Logica propia si es necesario
         (es importante añadir cooldown tras hacerlo)
     3. añadir una tecla bindeable con SpellChange()
