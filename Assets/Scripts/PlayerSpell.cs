@@ -16,7 +16,7 @@ public class PlayerSpell : MonoBehaviour
     {
         PlayerMovement = GetComponent<PlayerMovement>();
     }
-    public void Shoot(SpellType Type, float Speed, Vector3 Scale)
+    public void CastSpell(SpellType Type, float Speed, Vector3 Scale)
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
@@ -54,19 +54,19 @@ public class PlayerSpell : MonoBehaviour
                         Cooldown = SpellCooldown/3; 
                         break;
                     case SpellType.Rock:
-                        Shoot(SpellType.Rock, 10f, new Vector3(0.9f,0.7f,0.7f));
+                        CastSpell(SpellType.Rock, 10f, new Vector3(0.9f,0.7f,0.7f));
                         Cooldown = SpellCooldown; //por decision popular todos los hechizos van a tener el mismo cooldown
                         break;
                     case SpellType.Fire:
-                        Shoot(SpellType.Fire, 15f, new Vector3(1f,0.5f,0.5f));
+                        CastSpell(SpellType.Fire, 15f, new Vector3(1f,0.5f,0.5f));
                         Cooldown = SpellCooldown; //por comodidad lo voy a dejar asi por si dsp lo quieren cambiar
                         break;
                     case SpellType.Ice:
-                        Shoot(SpellType.Ice, 12f, new Vector3(0.7f,0.7f,0.7f));
+                        CastSpell(SpellType.Ice, 12f, new Vector3(0.7f,0.7f,0.7f));
                         Cooldown = SpellCooldown;
                         break;
                     case SpellType.Electricty:
-                        Shoot(SpellType.Electricty, 20f, new Vector3(0.9f,0.4f,0.4f));
+                        CastSpell(SpellType.Electricty, 20f, new Vector3(0.9f,0.4f,0.4f));
                         Cooldown = SpellCooldown;
                         break;
                     default:
