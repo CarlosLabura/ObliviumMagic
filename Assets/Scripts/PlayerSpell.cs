@@ -3,13 +3,19 @@ using UnityEngine;
 
 public class PlayerSpell : MonoBehaviour
 {
+    //hechizos
     public SpellType CurrentSpell = SpellType.Fist;
     public float SpellCooldown = 1.38f;
+    private float Cooldown = 0;
+    //variables internas
     [SerializeField] private GameObject Hitboxes; //uso esto para el pivote este en el centro del jugador
     [SerializeField] private GameObject FistHitbox;
     [SerializeField] private GameObject Projectile;
-    private float Cooldown = 0;
     private PlayerMovement PlayerMovement;
+    void Start()
+    {
+        PlayerMovement = GetComponent<PlayerMovement>();
+    }
     public void Shoot(SpellType Type, float Speed, Vector3 Scale)
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -21,10 +27,6 @@ public class PlayerSpell : MonoBehaviour
         Vector2 projectileDirection = (mousePosition - transform.position).normalized;
         projectile.GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg;
         projectile.GetComponent<Rigidbody2D>().AddForce(projectileDirection * Speed, ForceMode2D.Impulse);
-    }
-    void Start()
-    {
-        PlayerMovement = GetComponent<PlayerMovement>();
     }
     void Update()
     {

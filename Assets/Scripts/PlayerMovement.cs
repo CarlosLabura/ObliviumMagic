@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // velocidad
     public float Speed = 1f;
     public float CrouchMultiplier = 0.5f;
-    public bool Freezed = false;
-    public bool Stunned = false;
-    public float CameraSensivility = 1f;
-    private Rigidbody2D RigidBody2D;
     private Vector2 MoveVector;
     private float ActualSpeed;
+    // estados
+    public bool Freezed = false;
+    public bool Stunned = false;
     private float FreezeTimer = 0;
     private float StunTimer = 0;
+    // camara
+    public float CameraSensivility = 1f;
+    private float CameraSpeed = 5f;
+    //variables internas
+    private Rigidbody2D RigidBody2D;
     void Start()
     {
         RigidBody2D = GetComponent<Rigidbody2D>(); 
@@ -37,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             Camera.main.transform.position.z
         );
 
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, target, Time.deltaTime*5);
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, target, Time.deltaTime * CameraSpeed);
 
         if (FreezeTimer > 0) {
             FreezeTimer -= Time.deltaTime;

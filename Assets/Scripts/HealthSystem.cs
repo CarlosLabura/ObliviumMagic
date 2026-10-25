@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
+    // vida
     public int MaxHealth = 50;
     public int Health = 50;
     public SpellType Weakness;
+    // fuego
     private int FireDamage = 1;
     private float FireTimer = 0;
     private int FireTicks = 0;
+    // variables internas
     private PlayerMovement PlayerMovement;
     void Start()
     {
@@ -21,6 +24,11 @@ public class HealthSystem : MonoBehaviour
             // game over
         }
     }
+    /*
+        el fuego no es un estado, simplemente se aplica una cantidad de daño que se va aplicando
+        lentamente con ticks de 1 segundo, hay una cantidad de ticks restantes que al pasar un segundo
+        se sacan del contador y se restan de la vida
+    */
     public void Fire(int Ticks)
     {
         FireTicks += Ticks;
@@ -84,6 +92,7 @@ public class HealthSystem : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
+        // al jugador colisionar directamente con un enemigo
         if (gameObject.CompareTag("Player") && collision.gameObject.CompareTag("Enemy"))
             Damage(10);
     }
