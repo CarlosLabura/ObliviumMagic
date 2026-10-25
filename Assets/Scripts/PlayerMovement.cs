@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float CrouchMultiplier = 0.5f;
     public bool Freezed = false;
     public bool Stunned = false;
+    public float CameraSensivility = 1f;
     private Rigidbody2D RigidBody2D;
     private Vector2 MoveVector;
     private float ActualSpeed;
@@ -27,6 +28,17 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
+
+        Vector3 target = new Vector3(
+            transform.position.x + (transform.position.x + mousePosition.x) / CameraSensivility,
+            transform.position.y + (transform.position.y + mousePosition.y) / CameraSensivility,
+            Camera.main.transform.position.z
+        );
+
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, target, Time.deltaTime*5);
+
         if (FreezeTimer > 0) {
             FreezeTimer -= Time.deltaTime;
         } else {
