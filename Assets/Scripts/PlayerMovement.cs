@@ -8,8 +8,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 MoveVector;
     private float ActualSpeed;
     // estados
-    public bool Freezed = false;
-    public bool Stunned = false;
+    /* 
+        los estados no se pueden modificar solo con la variable, si o si se tienen que aplicar
+        con sus funciones respectivas y tener un tiempo de duracion. por eso estan ocultos en el inspector
+        mantengo las variables publicas para que se puedan acceder desde otros scripts
+    */
+    [HideInInspector] public bool Freezed = false;
+    [HideInInspector] public bool Stunned = false;
     private float FreezeTimer = 0;
     private float StunTimer = 0;
     // camara
