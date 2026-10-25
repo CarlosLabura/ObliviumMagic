@@ -22,7 +22,6 @@ public class SpellTypeScript : MonoBehaviour {
 */
 /*
     TODO: (aca pq este script no tiene otro uso)
-    - ia para los enemigos (pathfinding, disparar)
     - añadir desbloqueo de hechizos en vez de que solo esten todos desbloqueados
     - parry al golpear un proyectil
     - game over

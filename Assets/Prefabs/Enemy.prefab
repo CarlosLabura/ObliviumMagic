@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f5eb1a850dd7b4f87a7b986b7934ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCRoutine
-  State: 1
+  State: 0
   Distance: 5
   Sight: 10
   Player: {fileID: 0}

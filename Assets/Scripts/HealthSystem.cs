@@ -80,7 +80,6 @@ public class HealthSystem : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other) {
         // si el enemigo recibe un trigger de la hitbox del player or el player recibe hitbox de un enemigo
-        Debug.Log(other.gameObject.CompareTag("PlayerHitbox"));
         if (gameObject.CompareTag("Enemy") && other.gameObject.CompareTag("PlayerHitbox") 
         || gameObject.CompareTag("Player") && other.gameObject.CompareTag("EnemyHitbox"))
         {
