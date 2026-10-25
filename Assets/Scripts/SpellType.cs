@@ -1,6 +1,8 @@
 using UnityEngine;
 public enum SpellType {Fist, Rock, Fire, Ice, Ray, None}
-public class SpellTypeScript : MonoBehaviour { public SpellType Type; }
+public class SpellTypeScript : MonoBehaviour { 
+    public SpellType Type; 
+}
 
 /*
     COMO AÑADIR NUEVOS HECHIZOS: (en caso de ser necesario)

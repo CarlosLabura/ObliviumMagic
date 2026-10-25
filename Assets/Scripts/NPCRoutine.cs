@@ -29,13 +29,14 @@ public class NPCRoutine : MonoBehaviour
             State = NPCState.Attacking; //al llegar al rango de cercania, atacar
             return;
         }
-        if (State != NPCState.Following)
-            State = NPCState.Following;
-
         float step = speed * Time.fixedDeltaTime;
 
         MovementSystem.MoveVector = dist < step ? diff / step : diff / dist;
         MovementSystem.Speed = speed;
+    }
+    public void Attack(Vector3 position, SpellType Spell)
+    {
+        
     }
     void Update()
     {
