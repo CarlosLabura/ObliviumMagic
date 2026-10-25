@@ -789,7 +789,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
   Speed: 5
-  CrouchMultiplier: 0.5
   Freezed: 0
   Stunned: 0
   CameraSensivility: 10
@@ -854,8 +853,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0032639205, y: 0}
-  m_Radius: 0.44451407
+  m_Offset: {x: 0.0032639205, y: -0.000000044151587}
+  m_Radius: 0.3367025
 --- !u!212 &672573449
 SpriteRenderer:
   serializedVersion: 2
@@ -925,7 +924,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.675, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1666,8 +1665,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: -0.004175722, y: 0.013310202}
+  m_Radius: 0.34549877
 --- !u!212 &1938667376
 SpriteRenderer:
   serializedVersion: 2
@@ -1737,7 +1736,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.51, y: 0.19, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0757812, y: 0.675, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -48,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
         );
 
         Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, target, Time.deltaTime * CameraSpeed);
+        
+        Vector2 rotationDirection = (mousePosition - transform.position).normalized;
+        RigidBody2D.rotation = Mathf.Atan2(rotationDirection.y, rotationDirection.x) * Mathf.Rad2Deg -90f;
 
         if (FreezeTimer > 0) {
             FreezeTimer -= Time.deltaTime;

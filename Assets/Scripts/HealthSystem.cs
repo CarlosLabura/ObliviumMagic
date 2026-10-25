@@ -4,7 +4,7 @@ public class HealthSystem : MonoBehaviour
 {
     // vida
     public int MaxHealth = 50;
-    public int Health = 50;
+    public int Health = 0;
     public SpellType Weakness;
     // fuego
     private int FireDamage = 1;
@@ -15,6 +15,7 @@ public class HealthSystem : MonoBehaviour
     void Start()
     {
         PlayerMovement = GetComponent<PlayerMovement>();
+        Health = MaxHealth;
     }
     public void Damage(int Amount)
     {

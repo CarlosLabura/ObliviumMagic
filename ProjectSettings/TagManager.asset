@@ -8,6 +8,8 @@ TagManager:
   - EnemyHitbox
   - Enemy
   - Wall
+  - Window
+  - Door
   layers:
   - Default
   - TransparentFX

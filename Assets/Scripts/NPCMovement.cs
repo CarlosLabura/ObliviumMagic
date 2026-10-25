@@ -1,0 +1,68 @@
+using UnityEngine;
+
+public class NPCMovement : MonoBehaviour
+{
+    // velocidad
+    public float Speed = 1f;
+    private float CrouchMultiplier = 0.5f;
+    private Vector2 MoveVector;
+    private float ActualSpeed;
+    // estados
+    /* 
+        los estados no se pueden modificar solo con la variable, si o si se tienen que aplicar
+        con sus funciones respectivas y tener un tiempo de duracion. por eso estan ocultos en el inspector
+        mantengo las variables publicas para que se puedan acceder desde otros scripts
+    */
+    [HideInInspector] public bool Freezed = false;
+    [HideInInspector] public bool Stunned = false;
+    private float FreezeTimer = 0;
+    private float StunTimer = 0;
+    //variables internas
+    private Rigidbody2D RigidBody2D;
+    void Start()
+    {
+        RigidBody2D = GetComponent<Rigidbody2D>(); 
+    }
+    public void Freeze(float Time)
+    {
+        Freezed = true;
+        FreezeTimer = Time;
+    }
+    public void Stun(float Time)
+    {
+        Stunned = true;
+        StunTimer = Time;
+    }
+    void Update()
+    {
+        if (FreezeTimer > 0) {
+            FreezeTimer -= Time.deltaTime;
+        } else {
+            FreezeTimer = 0;
+            Freezed = false;
+        }
+
+        if (StunTimer > 0) {
+            StunTimer -= Time.deltaTime;
+        } else {
+            StunTimer = 0;
+            Stunned = false;
+        }
+
+        if (Stunned)
+            return;
+        
+        
+        //movement script
+
+        if (Input.GetKey(KeyCode.LeftShift) || Freezed)
+            ActualSpeed = Speed * CrouchMultiplier;
+        else
+            ActualSpeed = Speed;
+
+    }
+    void FixedUpdate()
+    {
+        //RigidBody2D.linearVelocity = MoveVector * ActualSpeed;
+    }
+}
