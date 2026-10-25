@@ -68,45 +68,47 @@ public class SpellSystem : MonoBehaviour
         if (Cooldown > 0)
             Cooldown -= Time.deltaTime;
 
-        // toda la logica de aca solo se aplica si el script lo tiene el jugador
-        if (MovementSystem.Player){
-            if (Cooldown <= 0)
-                FistHitbox.SetActive(false);
+        // toda la logica de aca solo se aplica si el script lo tiene un jugador
+        if (! MovementSystem.Player)
+            return;
 
-            // hitboxes fijas apuntan al mouse
-            //solo el player puede pegar puñetes
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0f;
+        if (Cooldown <= 0)
+            FistHitbox.SetActive(false);
 
-            Hitboxes.position = transform.position;
-            
-            Vector2 direction = mousePosition - transform.position;
-            Hitboxes.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
+        // hitboxes fijas apuntan al mouse
+        //solo el player puede pegar puñetes
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
+
+        Hitboxes.position = transform.position;
         
-            if (Input.GetMouseButton(0))
-            {
-                CastSpell(CurrentSpell, mousePosition);
-            }
-
-            // cambio de hechizos
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                CurrentSpell = SpellType.Fist;
-                SpellUI.SetText(CurrentSpell.ToString());
-            }
-            if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
-            {
-                CurrentSpell += 1;
-                if (CurrentSpell == SpellType.None)
-                    CurrentSpell = SpellType.Rock;
-
-                SpellUI.SetText(CurrentSpell.ToString());
-            } 
-            SpellChange(SpellType.Rock, KeyCode.Alpha1);
-            SpellChange(SpellType.Fire, KeyCode.Alpha2);
-            SpellChange(SpellType.Ice, KeyCode.Alpha3);
-            SpellChange(SpellType.Ray, KeyCode.Alpha4);
+        Vector2 direction = mousePosition - transform.position;
+        Hitboxes.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
+    
+        if (Input.GetMouseButton(0))
+        {
+            CastSpell(CurrentSpell, mousePosition);
         }
+
+        // cambio de hechizos
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            CurrentSpell = SpellType.Fist;
+            SpellUI.SetText(CurrentSpell.ToString());
+        }
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
+        {
+            CurrentSpell += 1;
+            if (CurrentSpell == SpellType.None)
+                CurrentSpell = SpellType.Rock;
+
+            SpellUI.SetText(CurrentSpell.ToString());
+        } 
+        SpellChange(SpellType.Rock, KeyCode.Alpha1);
+        SpellChange(SpellType.Fire, KeyCode.Alpha2);
+        SpellChange(SpellType.Ice, KeyCode.Alpha3);
+        SpellChange(SpellType.Ray, KeyCode.Alpha4);
+        
     }
     private void SpellChange(SpellType Type, KeyCode Keybind)
     {
