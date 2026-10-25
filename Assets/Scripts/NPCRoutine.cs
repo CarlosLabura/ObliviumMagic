@@ -13,7 +13,6 @@ public class NPCRoutine : MonoBehaviour
         MovementSystem = GetComponent<MovementSystem>();
         RigidBody2D = GetComponent<Rigidbody2D>(); 
     }
-
     public void Rotate(Vector3 position)
     {
         Vector2 direction = (position - transform.position).normalized;
@@ -24,23 +23,20 @@ public class NPCRoutine : MonoBehaviour
         Vector2 diff = position - RigidBody2D.position;
         float dist = diff.magnitude;
 
-        // Llegó: frená y salí
         if (dist <= stopDistance)
         {
             MovementSystem.MoveVector = Vector2.zero;
+            State = NPCState.Attacking; //al llegar al rango de cercania, atacar
             return;
         }
+        if (State != NPCState.Following)
+            State = NPCState.Following;
 
-        // Distancia que recorrería en un paso de física
         float step = speed * Time.fixedDeltaTime;
 
-        // Si falta menos que un paso, vector más corto para no pasarse
         MovementSystem.MoveVector = dist < step ? diff / step : diff / dist;
-
-        // Si MovementSystem tiene su propia velocidad, pasale esta
         MovementSystem.Speed = speed;
     }
-    
     void Update()
     {
         if (State == NPCState.Following)
