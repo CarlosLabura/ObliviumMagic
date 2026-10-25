@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
@@ -16,6 +17,7 @@ public class HealthSystem : MonoBehaviour
     private float InvencibleTime = 0f;
     // variables internas
     private MovementSystem MovementSystem;
+    [SerializeField] private TextMeshProUGUI HealthUI; // temporal
     void Start()
     {
         MovementSystem = GetComponent<MovementSystem>();
@@ -38,8 +40,10 @@ public class HealthSystem : MonoBehaviour
             return;
         }
         //empujon al recibir daño
-        if (MovementSystem.Player)
+        if (MovementSystem.Player) {
+            HealthUI.SetText(Health.ToString());
             Invencible(1);
+        }
     }
     /*
         el fuego no es un estado, simplemente se aplica una cantidad de daño que se va aplicando
@@ -100,7 +104,7 @@ public class HealthSystem : MonoBehaviour
                         Damage(10);
                         MovementSystem.Freeze(3f);
                         break;
-                    case SpellType.Electricty:
+                    case SpellType.Ray:
                         Damage(10);
                         MovementSystem.Stun(1f);
                         break;

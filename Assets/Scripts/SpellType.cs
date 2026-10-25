@@ -1,5 +1,5 @@
 using UnityEngine;
-public enum SpellType {Fist, Rock, Fire, Ice, Electricty, None}
+public enum SpellType {Fist, Rock, Fire, Ice, Ray, None}
 public class SpellTypeScript : MonoBehaviour { public SpellType Type; }
 
 /*
@@ -23,6 +23,7 @@ public class SpellTypeScript : MonoBehaviour { public SpellType Type; }
     - ia para los enemigos (pathfinding, disparar)
     - añadir desbloqueo de hechizos en vez de que solo esten todos desbloqueados
     - parry al golpear un proyectil
+    - game over
     - generar otro rayo al impactar con un enemigo
     - feedback para toda la semana
 

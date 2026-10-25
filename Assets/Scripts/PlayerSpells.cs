@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class PlayerSpells : MonoBehaviour
     [SerializeField] private GameObject FistHitbox;
     [SerializeField] private GameObject Projectile;
     private MovementSystem MovementSystem;
+    [SerializeField] private TextMeshProUGUI SpellUI; //temporal
     void Start()
     {
         MovementSystem = GetComponent<MovementSystem>();
@@ -65,8 +67,8 @@ public class PlayerSpells : MonoBehaviour
                         CastSpell(SpellType.Ice, 12f, new Vector3(0.7f,0.7f,0.7f));
                         Cooldown = SpellCooldown;
                         break;
-                    case SpellType.Electricty:
-                        CastSpell(SpellType.Electricty, 20f, new Vector3(0.9f,0.4f,0.4f));
+                    case SpellType.Ray:
+                        CastSpell(SpellType.Ray, 20f, new Vector3(0.9f,0.4f,0.4f));
                         Cooldown = SpellCooldown;
                         break;
                     default:
@@ -75,16 +77,23 @@ public class PlayerSpells : MonoBehaviour
             }
         }
         // cambio de hechizos
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            CurrentSpell = SpellType.Fist;
+            SpellUI.SetText(CurrentSpell.ToString());
+        }
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
         {
             CurrentSpell += 1;
             if (CurrentSpell == SpellType.None)
-                CurrentSpell = SpellType.Fist;
+                CurrentSpell = SpellType.Fire;
+
+            SpellUI.SetText(CurrentSpell.ToString());
         } 
         SpellChange(SpellType.Rock, KeyCode.Alpha1);
         SpellChange(SpellType.Fire, KeyCode.Alpha2);
         SpellChange(SpellType.Ice, KeyCode.Alpha3);
-        SpellChange(SpellType.Electricty, KeyCode.Alpha4);
+        SpellChange(SpellType.Ray, KeyCode.Alpha4);
     }
     private void SpellChange(SpellType Type, KeyCode Keybind)
     {
@@ -94,6 +103,8 @@ public class PlayerSpells : MonoBehaviour
                 CurrentSpell = SpellType.Fist;
             else
                 CurrentSpell = Type;
+            
+            SpellUI.SetText(CurrentSpell.ToString());
         }
     }
 }
