@@ -4,7 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     // velocidad
     public float Speed = 1f;
-    public float CrouchMultiplier = 0.5f;
+    private float CrouchMultiplier = 0.5f;
     private Vector2 MoveVector;
     private float ActualSpeed;
     // estados
