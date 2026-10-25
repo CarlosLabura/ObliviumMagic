@@ -86,7 +86,7 @@ public class PlayerSpells : MonoBehaviour
         {
             CurrentSpell += 1;
             if (CurrentSpell == SpellType.None)
-                CurrentSpell = SpellType.Fire;
+                CurrentSpell = SpellType.Rock;
 
             SpellUI.SetText(CurrentSpell.ToString());
         } 
