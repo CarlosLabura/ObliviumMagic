@@ -10,20 +10,33 @@ public class HealthSystem : MonoBehaviour
     private int FireDamage = 1;
     private float FireTimer = 0;
     private int FireTicks = 0;
+    // invencibilidad
+    [HideInInspector] public bool InvencibleState = false;
+    private float InvencibleTime = 0f;
     // variables internas
-    private PlayerMovement PlayerMovement;
+    private MovementSystem MovementSystem;
     void Start()
     {
-        PlayerMovement = GetComponent<PlayerMovement>();
+        MovementSystem = GetComponent<MovementSystem>();
         Health = MaxHealth;
+    }
+    public void Invencible(float Time)
+    {
+        InvencibleState = true;
+        InvencibleTime = Time;
     }
     public void Damage(int Amount)
     {
+        if (InvencibleState)
+            return;
+
         Health -= Amount;
         if (Health <= 0)
         {
             // game over
         }
+        if (MovementSystem.Player)
+            Invencible(1);
     }
     /*
         el fuego no es un estado, simplemente se aplica una cantidad de daño que se va aplicando
@@ -32,11 +45,21 @@ public class HealthSystem : MonoBehaviour
     */
     public void Fire(int Ticks)
     {
+        if (InvencibleState)
+            return;
+
         FireTicks += Ticks;
         FireTimer = 1f;
     }
     void Update()
     {
+        if (InvencibleTime > 0){
+            InvencibleTime -= Time.deltaTime;
+        } else {
+            if (InvencibleState)
+                InvencibleState = false;
+        }
+
         if (FireTimer > 0) {
             FireTimer -= Time.deltaTime;
         } else {
@@ -72,11 +95,11 @@ public class HealthSystem : MonoBehaviour
                         break;
                     case SpellType.Ice:
                         Damage(10);
-                        PlayerMovement.Freeze(3f);
+                        MovementSystem.Freeze(3f);
                         break;
                     case SpellType.Electricty:
                         Damage(10);
-                        PlayerMovement.Stun(1f);
+                        MovementSystem.Stun(1f);
                         //generar otro rayo o algo i dunno
                         break;
                     default:

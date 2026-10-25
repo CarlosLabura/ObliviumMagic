@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class NPCMovement : MonoBehaviour
+public class MovementSystem : MonoBehaviour
 {
+    public bool Player = false;
     // velocidad
     public float Speed = 1f;
     private float CrouchMultiplier = 0.5f;
@@ -17,6 +18,9 @@ public class NPCMovement : MonoBehaviour
     [HideInInspector] public bool Stunned = false;
     private float FreezeTimer = 0;
     private float StunTimer = 0;
+    // camara
+    public float CameraSensivility = 1f;
+    private float CameraSpeed = 5f;
     //variables internas
     private Rigidbody2D RigidBody2D;
     void Start()
@@ -35,6 +39,22 @@ public class NPCMovement : MonoBehaviour
     }
     void Update()
     {
+        if (Player){ 
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0f;
+
+            Vector3 target = new Vector3(
+                transform.position.x + (transform.position.x + mousePosition.x) / CameraSensivility,
+                transform.position.y + (transform.position.y + mousePosition.y) / CameraSensivility,
+                Camera.main.transform.position.z
+            );
+
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, target, Time.deltaTime * CameraSpeed);
+            
+            Vector2 rotationDirection = (mousePosition - transform.position).normalized;
+            RigidBody2D.rotation = Mathf.Atan2(rotationDirection.y, rotationDirection.x) * Mathf.Rad2Deg -90f;
+        }
+
         if (FreezeTimer > 0) {
             FreezeTimer -= Time.deltaTime;
         } else {
@@ -51,9 +71,9 @@ public class NPCMovement : MonoBehaviour
 
         if (Stunned)
             return;
-        
-        
-        //movement script
+
+        if (Player)
+            MoveVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
         if (Input.GetKey(KeyCode.LeftShift) || Freezed)
             ActualSpeed = Speed * CrouchMultiplier;
@@ -63,6 +83,6 @@ public class NPCMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //RigidBody2D.linearVelocity = MoveVector * ActualSpeed;
+        RigidBody2D.linearVelocity = MoveVector * ActualSpeed;
     }
 }

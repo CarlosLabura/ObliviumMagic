@@ -11,10 +11,10 @@ public class PlayerSpell : MonoBehaviour
     [SerializeField] private GameObject Hitboxes; //uso esto para el pivote este en el centro del jugador
     [SerializeField] private GameObject FistHitbox;
     [SerializeField] private GameObject Projectile;
-    private PlayerMovement PlayerMovement;
+    private MovementSystem MovementSystem;
     void Start()
     {
-        PlayerMovement = GetComponent<PlayerMovement>();
+        MovementSystem = GetComponent<MovementSystem>();
     }
     public void CastSpell(SpellType Type, float Speed, Vector3 Scale)
     {
@@ -43,7 +43,7 @@ public class PlayerSpell : MonoBehaviour
         Hitboxes.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
 
         // lo que pasa al clikear, se aca se activan las hitbox y se tiran los proyectiles
-        if (Cooldown <= 0 && !PlayerMovement.Stunned){
+        if (Cooldown <= 0 && !MovementSystem.Stunned){
             FistHitbox.SetActive(false);
             if (Input.GetMouseButton(0))
             {   
