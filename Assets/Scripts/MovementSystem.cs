@@ -37,6 +37,12 @@ public class MovementSystem : MonoBehaviour
         Stunned = true;
         StunTimer = Time;
     }
+    public void Knockback(Vector3 position, float Force)
+    {
+        Stun(0.1f);
+        Vector2 attackDirection = (position - transform.position).normalized;
+        MoveVector = -attackDirection * Force;
+    }
     void Update()
     {
         if (Player){ 
@@ -72,10 +78,13 @@ public class MovementSystem : MonoBehaviour
         if (Stunned)
             return;
 
-        if (Player)
+        if (Player) {
             MoveVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+            if (Input.GetKey(KeyCode.LeftShift))
+                ActualSpeed = Speed * CrouchMultiplier;
+        }
 
-        if (Input.GetKey(KeyCode.LeftShift) || Freezed)
+        if (Freezed)
             ActualSpeed = Speed * CrouchMultiplier;
         else
             ActualSpeed = Speed;

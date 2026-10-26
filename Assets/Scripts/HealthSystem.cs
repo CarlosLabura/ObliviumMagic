@@ -42,6 +42,11 @@ public class HealthSystem : MonoBehaviour
         if (MovementSystem.Player) {
             HealthUI.SetText(Health.ToString());
             Invencible(1);
+
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0f;
+
+            MovementSystem.Knockback(mousePosition, 2);
         }
     }
     /*
