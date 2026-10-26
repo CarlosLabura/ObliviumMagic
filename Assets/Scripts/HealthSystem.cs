@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    // vida
-    public int MaxHealth = 50;
-    public int Health = 0;
+    [Header("Health Settings")]
+    [Min(0)] public int MaxHealth = 50;
+    [Min(-1)] public int Health = 0;
     public SpellType Weakness;
     // fuego
     private int FireDamage = 1;
@@ -17,7 +17,7 @@ public class HealthSystem : MonoBehaviour
     private float InvencibleTime = 0f;
     // variables internas
     private MovementSystem MovementSystem;
-    [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private TextMeshProUGUI HealthUI; // temporal
+    [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] [SerializeField] private TextMeshProUGUI HealthUI; // temporal
     void Start()
     {
         MovementSystem = GetComponent<MovementSystem>();

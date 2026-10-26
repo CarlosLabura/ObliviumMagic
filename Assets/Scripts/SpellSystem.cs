@@ -7,13 +7,14 @@ public class SpellSystem : MonoBehaviour
 {
     //hechizos
     public SpellType CurrentSpell = SpellType.Fist;
-    public float SpellCooldown = 1.38f;
+    [Header("Spell System")]
+    [Min(0)] public float SpellCooldown = 1.38f;
     private float Cooldown = 0;
-    [ShowIf(typeof(MovementSystem), "Player")] public SpellType[] UnlockedSpells = {SpellType.Fist};
     private int SpellCycle = 1; //empieza en uno para hacer que no se elijan los fist
     private float FistTime = 0f;
     //variables internas
     [SerializeField] private GameObject Projectile;
+    [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] public SpellType[] UnlockedSpells = {SpellType.Fist};
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private Transform Hitboxes; //uso esto para el pivote este en el centro del jugador
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private GameObject FistHitbox;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private CursorReplace CursorReplace;

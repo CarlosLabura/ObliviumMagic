@@ -3,8 +3,8 @@ using UnityEngine;
 public class MovementSystem : MonoBehaviour
 {
     public bool Player = false;
-    // velocidad
-    public float Speed = 1f;
+    [Header("Movement Settings")]
+    [Min(0)] public float Speed = 1f;
     private float CrouchMultiplier = 0.5f;
     [HideInInspector] public Vector2 MoveVector;
     private float ActualSpeed;
@@ -19,7 +19,8 @@ public class MovementSystem : MonoBehaviour
     private float FreezeTimer = 0;
     private float StunTimer = 0;
     // camara
-    [ShowIf("Player")] public float CameraSensivility = 1f;
+    [ShowIf("Player")] [Header("Player Settings")]
+    [Min(0)] public float CameraSensivility = 1f;
     private float CameraSpeed = 5f;
     //variables internas
     private Rigidbody2D RigidBody2D;

@@ -5,11 +5,12 @@ public enum NPCState { Patrol, Following, Attacking, Searching }
 public class NPCRoutine : MonoBehaviour
 {
     public NPCState State = NPCState.Following;
-    public float Distance;              // distancia para empezar a atacar
-    public float Sight;                 // distancia de visión, al irte de ahí te deja de seguir
+    [Header("Sight Settings")]
+    [Min(0)] public float ShootingDistance;              // distancia para empezar a atacar
+    [Min(0)] public float SightLost;                 // distancia de visión, al irte de ahí te deja de seguir
     private Vector2 LastSeenPosition;    // última posición en la que te vio
     // variables internas
-    [SerializeField] private Transform Player;
+    public Transform Target;
     private MovementSystem MovementSystem;
     private Rigidbody2D RigidBody2D;
     private SpellSystem SpellSystem;
@@ -38,7 +39,7 @@ public class NPCRoutine : MonoBehaviour
     }
     private bool CanSee(Vector2 target)
     {
-        return (target - RigidBody2D.position).magnitude < Sight && !objectBetween(target);
+        return (target - RigidBody2D.position).magnitude < SightLost && !objectBetween(target);
     }
     private void StartSearching()
     {
@@ -70,7 +71,7 @@ public class NPCRoutine : MonoBehaviour
             StartSearching();
             return;
         }
-        if (dist <= Distance)
+        if (dist <= ShootingDistance)
         {
             MovementSystem.MoveVector = Vector2.zero;
             State = NPCState.Attacking; // al llegar al rango de cercanía, atacar
@@ -93,7 +94,7 @@ public class NPCRoutine : MonoBehaviour
             StartSearching(); // pared en medio: ir a la última posición vista
             return;
         }
-        if ((target - RigidBody2D.position).magnitude > Distance)
+        if ((target - RigidBody2D.position).magnitude > ShootingDistance)
         {
             State = NPCState.Following; // al salir del rango continuar siguiendo
             return;
@@ -104,7 +105,7 @@ public class NPCRoutine : MonoBehaviour
 
     public void Search(Vector2 lastSeen)
     {
-        if (CanSee(Player.position))
+        if (CanSee(Target.position))
         {
             State = NPCState.Patrol;
             return;
@@ -138,14 +139,14 @@ public class NPCRoutine : MonoBehaviour
     }
     void Update()
     {
-        Vector2 playerPos = Player.position;
+        Vector2 TargetPos = Target.position;
 
-        if (CanSee(playerPos))
-            LastSeenPosition = playerPos;
+        if (CanSee(TargetPos))
+            LastSeenPosition = TargetPos;
 
-             if (State == NPCState.Patrol)    Patrol(playerPos);
-        else if (State == NPCState.Following) Move(playerPos);
-        else if (State == NPCState.Attacking) Attack(playerPos);
+             if (State == NPCState.Patrol)    Patrol(TargetPos);
+        else if (State == NPCState.Following) Move(TargetPos);
+        else if (State == NPCState.Attacking) Attack(TargetPos);
         else if (State == NPCState.Searching) Search(LastSeenPosition);
     }
 }
