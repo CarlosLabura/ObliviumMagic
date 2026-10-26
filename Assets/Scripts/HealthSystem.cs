@@ -17,7 +17,7 @@ public class HealthSystem : MonoBehaviour
     private float InvencibleTime = 0f;
     // variables internas
     private MovementSystem MovementSystem;
-    [SerializeField] private TextMeshProUGUI HealthUI; // temporal
+    [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private TextMeshProUGUI HealthUI; // temporal
     void Start()
     {
         MovementSystem = GetComponent<MovementSystem>();

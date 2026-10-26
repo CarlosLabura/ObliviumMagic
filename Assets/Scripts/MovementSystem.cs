@@ -19,7 +19,7 @@ public class MovementSystem : MonoBehaviour
     private float FreezeTimer = 0;
     private float StunTimer = 0;
     // camara
-    public float CameraSensivility = 1f;
+    [ShowIf("Player")] public float CameraSensivility = 1f;
     private float CameraSpeed = 5f;
     //variables internas
     private Rigidbody2D RigidBody2D;

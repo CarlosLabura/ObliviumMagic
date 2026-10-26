@@ -9,14 +9,15 @@ public class SpellSystem : MonoBehaviour
     public SpellType CurrentSpell = SpellType.Fist;
     public float SpellCooldown = 1.38f;
     private float Cooldown = 0;
-    public SpellType[] UnlockedSpells = {SpellType.Fist};
+    [ShowIf(typeof(MovementSystem), "Player")] public SpellType[] UnlockedSpells = {SpellType.Fist};
     private int SpellCycle = 1; //empieza en uno para hacer que no se elijan los fist
     //variables internas
     [SerializeField] private GameObject Projectile;
-    [SerializeField] private Transform Hitboxes; //uso esto para el pivote este en el centro del jugador
-    [SerializeField] private GameObject FistHitbox;
+    [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private Transform Hitboxes; //uso esto para el pivote este en el centro del jugador
+    [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private GameObject FistHitbox;
+    
+    [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private TextMeshProUGUI SpellUI; //temporal
     private MovementSystem MovementSystem;
-    [SerializeField] private TextMeshProUGUI SpellUI; //temporal
     void Start()
     {
         MovementSystem = GetComponent<MovementSystem>();
