@@ -11,6 +11,7 @@ public class SpellSystem : MonoBehaviour
     private float Cooldown = 0;
     [ShowIf(typeof(MovementSystem), "Player")] public SpellType[] UnlockedSpells = {SpellType.Fist};
     private int SpellCycle = 1; //empieza en uno para hacer que no se elijan los fist
+    private float FistTime = 0f;
     //variables internas
     [SerializeField] private GameObject Projectile;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private Transform Hitboxes; //uso esto para el pivote este en el centro del jugador
@@ -41,7 +42,8 @@ public class SpellSystem : MonoBehaviour
             case SpellType.Fist:
                 if (MovementSystem.Player) {
                     FistHitbox.SetActive(true);
-                    Cooldown = SpellCooldown/3; 
+                    Cooldown = SpellCooldown/2;
+                    FistTime = 0.15f;
                 }
                 break;
             case SpellType.Rock:
@@ -72,8 +74,10 @@ public class SpellSystem : MonoBehaviour
         // toda la logica de aca solo se aplica si el script lo tiene un jugador
         if (! MovementSystem.Player)
             return;
-
-        if (Cooldown <= 0)
+        
+        if (FistTime > 0)
+            FistTime -= Time.deltaTime;
+        else
             FistHitbox.SetActive(false);
 
         // hitboxes fijas apuntan al mouse

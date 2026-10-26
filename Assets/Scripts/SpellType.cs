@@ -23,7 +23,7 @@ public class SpellTypeScript : MonoBehaviour {
 */
 /*
     TODO: (aca pq este script no tiene otro uso)
-    - parry al golpear un proyectil
+    - empujar hacia atras al recibir daño
     - game over
     - generar otro rayo al impactar con un enemigo
     - feedback para toda la semana

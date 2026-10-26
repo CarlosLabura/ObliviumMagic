@@ -39,7 +39,6 @@ public class HealthSystem : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        //empujon al recibir daño
         if (MovementSystem.Player) {
             HealthUI.SetText(Health.ToString());
             Invencible(1);
