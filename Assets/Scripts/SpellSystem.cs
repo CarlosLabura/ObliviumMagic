@@ -15,7 +15,7 @@ public class SpellSystem : MonoBehaviour
     [SerializeField] private GameObject Projectile;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private Transform Hitboxes; //uso esto para el pivote este en el centro del jugador
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private GameObject FistHitbox;
-    
+    [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private CursorReplace CursorReplace;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private TextMeshProUGUI SpellUI; //temporal
     private MovementSystem MovementSystem;
     void Start()
@@ -118,6 +118,7 @@ public class SpellSystem : MonoBehaviour
         else
             CurrentSpell = UnlockedSpells[0];
         
+        CursorReplace.ChangeCursor(CurrentSpell);
         SpellUI.SetText(CurrentSpell.ToString());
     }
     private void SpellKeybind(SpellType Type, KeyCode Keybind)

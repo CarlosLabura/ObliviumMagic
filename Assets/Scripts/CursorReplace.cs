@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class CursorReplace : MonoBehaviour
 {
+    private Animator Animator;
     void Start()
     {
         Cursor.visible = false;
+        Animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -13,5 +15,9 @@ public class CursorReplace : MonoBehaviour
             Input.mousePosition.y,
             gameObject.transform.position.z
         );
+    }
+    public void ChangeCursor(SpellType Type)
+    {
+        Animator.Play(Type.ToString());
     }
 }
