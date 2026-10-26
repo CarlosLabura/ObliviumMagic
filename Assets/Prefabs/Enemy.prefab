@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementSystem
   Player: 0
-  Speed: 1
+  Speed: 2.5
   MoveVector: {x: 0, y: 0}
   Freezed: 0
   Stunned: 0
@@ -209,9 +209,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpellSystem
   CurrentSpell: 1
   SpellCooldown: 1.38
+  UnlockedSpells: 01000000
   Projectile: {fileID: 5738630424762621211, guid: a05f28d6fba084f4d9cdfced131f72f2, type: 3}
   Hitboxes: {fileID: 0}
   FistHitbox: {fileID: 0}
+  CursorReplace: {fileID: 0}
   SpellUI: {fileID: 0}
 --- !u!114 &7521559408632948322
 MonoBehaviour:

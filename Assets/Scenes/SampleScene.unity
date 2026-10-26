@@ -2492,10 +2492,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4373453352128080088, guid: fcb9eb7917a2aac4b8298abb510f4f03, type: 3}
-      propertyPath: Player
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5381420508717282595, guid: fcb9eb7917a2aac4b8298abb510f4f03, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.51
@@ -2534,14 +2530,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5381420508717282595, guid: fcb9eb7917a2aac4b8298abb510f4f03, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5754333175678520706, guid: fcb9eb7917a2aac4b8298abb510f4f03, type: 3}
-      propertyPath: 'UnlockedSpells.Array.data[0]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7521559408632948322, guid: fcb9eb7917a2aac4b8298abb510f4f03, type: 3}
-      propertyPath: State
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7521559408632948322, guid: fcb9eb7917a2aac4b8298abb510f4f03, type: 3}
