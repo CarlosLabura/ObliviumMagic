@@ -32,6 +32,7 @@ public class SpellSystem : MonoBehaviour
         Vector2 projectileDirection = (Target - transform.position).normalized;
         projectile.GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg;
         projectile.GetComponent<Rigidbody2D>().AddForce(projectileDirection * Speed, ForceMode2D.Impulse);
+        Destroy(projectile, 5f);
     }
     public void CastSpell(SpellType Type, Vector3 Target)
     {

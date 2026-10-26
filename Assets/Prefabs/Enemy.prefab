@@ -209,8 +209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpellSystem
   CurrentSpell: 1
   SpellCooldown: 1.38
-  UnlockedSpells: 01000000
   Projectile: {fileID: 5738630424762621211, guid: a05f28d6fba084f4d9cdfced131f72f2, type: 3}
+  UnlockedSpells: 01000000
   Hitboxes: {fileID: 0}
   FistHitbox: {fileID: 0}
   CursorReplace: {fileID: 0}
@@ -228,6 +228,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCRoutine
   State: 0
-  Distance: 5
-  Sight: 10
-  Player: {fileID: 0}
+  ShootingDistance: 5
+  SightLost: 8
+  Target: {fileID: 0}
