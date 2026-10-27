@@ -15,7 +15,6 @@ public class SpellSystem : MonoBehaviour
     //variables internas
     [SerializeField] private GameObject Projectile;
     [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] public SpellType[] UnlockedSpells = {SpellType.Fist};
-    [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private Transform Hitboxes; //uso esto para el pivote este en el centro del jugador
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private GameObject FistHitbox;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private CursorReplace CursorReplace;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private TextMeshProUGUI SpellUI; //temporal
@@ -77,20 +76,14 @@ public class SpellSystem : MonoBehaviour
         if (! MovementSystem.Player)
             return;
         
+        //solo el player puede pegar puñetes
         if (FistTime > 0)
             FistTime -= Time.deltaTime;
         else
             FistHitbox.SetActive(false);
 
-        // hitboxes fijas apuntan al mouse
-        //solo el player puede pegar puñetes
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
-
-        Hitboxes.position = transform.position;
-        
-        Vector2 direction = mousePosition - transform.position;
-        Hitboxes.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f);
     
         if (Input.GetMouseButton(0))
         {
