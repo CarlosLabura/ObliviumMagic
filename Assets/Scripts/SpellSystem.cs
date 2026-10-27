@@ -19,11 +19,15 @@ public class SpellSystem : MonoBehaviour
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private CursorReplace CursorReplace;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private TextMeshProUGUI SpellUI; //temporal
     private MovementSystem MovementSystem;
+    public Vector3 GetCursorPosition()
+    {
+        return CursorReplace.GetCursorPosition();
+    }
     void Start()
     {
         MovementSystem = GetComponent<MovementSystem>();
     }
-    private void Spell(SpellType Type, float Speed, Vector3 Scale, Vector3 Target) //mousePosition
+    private void Spell(SpellType Type, float Speed, Vector3 Scale, Vector3 Target)
     {
         GameObject projectile = Instantiate(Projectile, transform.position, Quaternion.identity);
         projectile.GetComponent<SpellTypeScript>().Type = Type;
@@ -81,13 +85,10 @@ public class SpellSystem : MonoBehaviour
             FistTime -= Time.deltaTime;
         else
             FistHitbox.SetActive(false);
-
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f;
     
         if (Input.GetMouseButton(0))
         {
-            CastSpell(CurrentSpell, mousePosition);
+            CastSpell(CurrentSpell, GetCursorPosition());
         }
 
         if (UnlockedSpells.Length <= 1)

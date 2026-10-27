@@ -23,6 +23,7 @@ public class SpellTypeScript : MonoBehaviour {
 */
 /*
     TODO: (aca pq este script no tiene otro uso)
+    - arreglar seguimiento de camara
     - game over
     - generar otro rayo al impactar con un enemigo
     - feedback para toda la semana

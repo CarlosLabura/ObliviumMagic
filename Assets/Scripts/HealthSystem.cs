@@ -17,10 +17,12 @@ public class HealthSystem : MonoBehaviour
     private float InvencibleTime = 0f;
     // variables internas
     private MovementSystem MovementSystem;
+    private SpellSystem SpellSystem;
     [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] [SerializeField] private TextMeshProUGUI HealthUI; // temporal
     void Start()
     {
         MovementSystem = GetComponent<MovementSystem>();
+        SpellSystem = GetComponent<SpellSystem>();
         Health = MaxHealth;
     }
     public void Invencible(float Time)
@@ -42,11 +44,7 @@ public class HealthSystem : MonoBehaviour
         if (MovementSystem.Player) {
             HealthUI.SetText(Health.ToString());
             Invencible(1);
-
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0f;
-
-            MovementSystem.Knockback(mousePosition, 2);
+            MovementSystem.Knockback(SpellSystem.GetCursorPosition(), 2);
         }
     }
     /*

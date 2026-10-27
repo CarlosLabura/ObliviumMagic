@@ -20,4 +20,10 @@ public class CursorReplace : MonoBehaviour
     {
         Animator.Play(Type.ToString());
     }
+    public Vector3 GetCursorPosition()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
+        return mousePosition;
+    }
 }

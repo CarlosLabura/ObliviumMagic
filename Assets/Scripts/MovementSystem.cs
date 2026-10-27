@@ -24,8 +24,10 @@ public class MovementSystem : MonoBehaviour
     private float CameraSpeed = 5f;
     //variables internas
     private Rigidbody2D RigidBody2D;
+    private SpellSystem SpellSystem;
     void Start()
     {
+        SpellSystem = GetComponent<SpellSystem>();
         RigidBody2D = GetComponent<Rigidbody2D>(); 
     }
     public void Freeze(float Time)
@@ -47,8 +49,7 @@ public class MovementSystem : MonoBehaviour
     void Update()
     {
         if (Player){ 
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0f;
+            Vector3 mousePosition = SpellSystem.GetCursorPosition();
 
             Vector3 target = new Vector3(
                 transform.position.x + (transform.position.x + mousePosition.x) / CameraSensivility,
