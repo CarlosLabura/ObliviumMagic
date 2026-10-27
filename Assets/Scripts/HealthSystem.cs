@@ -18,7 +18,7 @@ public class HealthSystem : MonoBehaviour
     // variables internas
     private MovementSystem MovementSystem;
     private SpellSystem SpellSystem;
-    [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] [SerializeField] private TextMeshProUGUI HealthUI; // temporal
+    [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] [SerializeField] private HUDBlood HUDBlood; // temporal
     void Start()
     {
         MovementSystem = GetComponent<MovementSystem>();
@@ -42,7 +42,7 @@ public class HealthSystem : MonoBehaviour
             return;
         }
         if (MovementSystem.Player) {
-            HealthUI.SetText(Health.ToString());
+            HUDBlood.Health = 1 * Health;
             Invencible(1);
             MovementSystem.Knockback(SpellSystem.GetCursorPosition(), 2);
         }
