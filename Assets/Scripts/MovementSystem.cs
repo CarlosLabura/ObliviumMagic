@@ -50,11 +50,10 @@ public class MovementSystem : MonoBehaviour
     {
         if (Player){ 
             Vector3 mousePosition = SpellSystem.GetCursorPosition();
-            // + (transform.position.y + mousePosition.y) 
-
+            
             Vector3 target = new Vector3(
-                transform.position.x,
-                transform.position.y,
+                transform.position.x + ((transform.position.x + mousePosition.x) / 2) / CameraSensivility,
+                transform.position.y + ((transform.position.y + mousePosition.y) / 2) / CameraSensivility,
                 Camera.main.transform.position.z
             );
 

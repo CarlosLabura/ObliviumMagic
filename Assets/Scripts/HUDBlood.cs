@@ -17,7 +17,6 @@ public class HUDBlood : MonoBehaviour
     {
         Health = healthAmount;
     }
-
     void Update()
     {
         Image.fillAmount = Mathf.Lerp(Image.fillAmount, Health, Time.deltaTime*5);

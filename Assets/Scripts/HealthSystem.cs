@@ -18,7 +18,7 @@ public class HealthSystem : MonoBehaviour
     // variables internas
     private MovementSystem MovementSystem;
     private SpellSystem SpellSystem;
-    [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] [SerializeField] private HUDBlood HUDBlood; // temporal
+    [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] [SerializeField] private HUDBlood HUDBlood;
     void Start()
     {
         MovementSystem = GetComponent<MovementSystem>();

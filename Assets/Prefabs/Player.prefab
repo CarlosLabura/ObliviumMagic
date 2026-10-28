@@ -191,10 +191,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
   MaxHealth: 50
-  Health: 0
+  Health: 50
   Weakness: 5
   InvencibleState: 0
-  HealthUI: {fileID: 0}
+  HUDBlood: {fileID: 0}
 --- !u!114 &4603437217764618328
 MonoBehaviour:
   m_ObjectHideFlags: 0
