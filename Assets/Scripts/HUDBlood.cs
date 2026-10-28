@@ -17,10 +17,10 @@ public class HUDBlood : MonoBehaviour
     public void SetHealth(float healthAmount)
     {
         Health = healthAmount;
-        if (Health <= 0.5)
-            BloodBall.Play("Half");
-        else if (Health <= 0.2)
+        if (Health <= 0.25)
             BloodBall.Play("Low");
+        else if (Health <= 0.5)
+            BloodBall.Play("Half");
         else
             BloodBall.Play("Full");
     }
