@@ -17,12 +17,12 @@ public class SpellSystem : MonoBehaviour
     [Header("Spell System")]
     [Min(0)] public float SpellCooldown = 1.38f;
     private float Cooldown = 0;
+    private int SpellStart = 1; // index donde empiezan los hechizos sin contar los fists
     private int SpellCycle = 1; //empieza en uno para hacer que no se elijan los fist
     private float FistTime = 0f;
     //variables internas
     [SerializeField] private GameObject Projectile;
     [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] public SpellData[] PlayerSpells;
-    private int SpellStart = 1; // index donde empiezan los hechizos sin contar los fists
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private GameObject FistHitbox;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private CursorReplace CursorReplace;
     private MovementSystem MovementSystem;
