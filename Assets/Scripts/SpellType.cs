@@ -19,11 +19,9 @@ public class SpellTypeScript : MonoBehaviour {
         - esa logica solo se va a aplicar si el enemigo es debil a el hechizo (ser debil a ninguno (None) significa ser debil a TODOS)
         - no hace falta destruir el hechizo al impactar, ya que su logica de destruccion esta automaticamente programada en ProjectileCollision.cs
     5. Recorda añadirlo a los hechizos desbloqueados en el inspector si queres que sea usado por el jugador
-
 */
 /*
     TODO: (aca pq este script no tiene otro uso)
-    - arreglar seguimiento de camara
     - game over
     - generar otro rayo al impactar con un enemigo
     - feedback para toda la semana
