@@ -2480,125 +2480,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1721504603}
     - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: SpellBoxes.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: PlayerSpells.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: PlayerSpells.Array.data[1].Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: PlayerSpells.Array.data[2].Type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: PlayerSpells.Array.data[3].Type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: PlayerSpells.Array.data[4].Type
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[1].Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[2].Type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[3].Type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[4].Type
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: PlayerSpells.Array.data[0].Unlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
       propertyPath: PlayerSpells.Array.data[1].SpellBox
       value: 
       objectReference: {fileID: 1412536426}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: PlayerSpells.Array.data[1].Unlocked
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
       propertyPath: PlayerSpells.Array.data[2].SpellBox
       value: 
       objectReference: {fileID: 1285137404}
     - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: PlayerSpells.Array.data[2].Unlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
       propertyPath: PlayerSpells.Array.data[3].SpellBox
       value: 
       objectReference: {fileID: 1516185677}
     - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: PlayerSpells.Array.data[3].Unlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
       propertyPath: PlayerSpells.Array.data[4].SpellBox
       value: 
       objectReference: {fileID: 1494733223}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: PlayerSpells.Array.data[4].Unlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[0].Unlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[1].SpellBox
-      value: 
-      objectReference: {fileID: 1412536426}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[1].Unlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[2].SpellBox
-      value: 
-      objectReference: {fileID: 1285137404}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[2].Unlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[3].SpellBox
-      value: 
-      objectReference: {fileID: 1516185677}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[3].Unlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[4].SpellBox
-      value: 
-      objectReference: {fileID: 1494733223}
-    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: UnlockedSpells.Array.data[4].Unlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5178122449435255295, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
-      propertyPath: Player
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7283729043449900440, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
