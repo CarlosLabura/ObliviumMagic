@@ -210,10 +210,24 @@ MonoBehaviour:
   CurrentSpell: 0
   SpellCooldown: 0.7
   Projectile: {fileID: 5738630424762621211, guid: 4d3a6bc55972400449163462af3931bc, type: 3}
-  UnlockedSpells: 0000000001000000020000000300000004000000
+  PlayerSpells:
+  - Type: 0
+    Unlocked: 1
+    SpellBox: {fileID: 0}
+  - Type: 1
+    Unlocked: 1
+    SpellBox: {fileID: 0}
+  - Type: 2
+    Unlocked: 1
+    SpellBox: {fileID: 0}
+  - Type: 3
+    Unlocked: 1
+    SpellBox: {fileID: 0}
+  - Type: 4
+    Unlocked: 1
+    SpellBox: {fileID: 0}
   FistHitbox: {fileID: 8496479818883155216}
   CursorReplace: {fileID: 0}
-  SpellUI: {fileID: 0}
 --- !u!1 &8496479818883155216
 GameObject:
   m_ObjectHideFlags: 0
