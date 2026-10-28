@@ -146,9 +146,7 @@ public class SpellSystem : MonoBehaviour
             CurrentSpell = UnlockedSpells[0].Type;
 
         SpellCycle = SpellIndex;
-        if (SpellCycle < SpellStart)
-            SpellCycle = SpellStart;
-        
+
         CursorReplace.ChangeCursor(CurrentSpell);
     }
     private void SpellKeybind(int Type, KeyCode Keybind)
