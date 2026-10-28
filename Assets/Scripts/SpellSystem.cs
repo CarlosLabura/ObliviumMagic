@@ -21,7 +21,7 @@ public class SpellSystem : MonoBehaviour
     private float FistTime = 0f;
     //variables internas
     [SerializeField] private GameObject Projectile;
-    [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] public SpellData[] UnlockedSpells;
+    [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] public SpellData[] PlayerSpells;
     private int SpellStart = 1; // index donde empiezan los hechizos sin contar los fists
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private GameObject FistHitbox;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private CursorReplace CursorReplace;
@@ -98,7 +98,7 @@ public class SpellSystem : MonoBehaviour
             CastSpell(CurrentSpell, GetCursorPosition());
         }
 
-        if (UnlockedSpells.Length <= 1)
+        if (PlayerSpells.Length <= 1)
             return;
 
         // cambio de hechizos
@@ -109,7 +109,7 @@ public class SpellSystem : MonoBehaviour
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
         {
             SpellCycle += 1;
-            if (SpellCycle >= UnlockedSpells.Length)
+            if (SpellCycle >= PlayerSpells.Length)
                 SpellCycle = SpellStart;
             ChangeSpell(SpellCycle);
         } 
@@ -119,9 +119,9 @@ public class SpellSystem : MonoBehaviour
         SpellKeybind(4, KeyCode.Alpha4);
 
         //hud de hechizos
-        for (int i = SpellStart; i < UnlockedSpells.Length; i++)
+        for (int i = SpellStart; i < PlayerSpells.Length; i++)
         {
-            SpellData Spell = UnlockedSpells[i];
+            SpellData Spell = PlayerSpells[i];
             float alpha = 0f;
             if (Spell.Unlocked)
                 alpha = 1f;
@@ -135,15 +135,17 @@ public class SpellSystem : MonoBehaviour
     }
     private void ChangeSpell(int SpellIndex)
     {
-        if (SpellIndex >= UnlockedSpells.Length || SpellIndex < 0)
+        if (SpellIndex >= PlayerSpells.Length || SpellIndex < 0)
             SpellIndex = 0;
 
-        SpellData Spell = UnlockedSpells[SpellIndex];
-
-        if (Spell.Unlocked)
+        SpellData Spell = PlayerSpells[SpellIndex];
+        
+        if (Spell.Unlocked) {
             CurrentSpell = Spell.Type;
-        else
-            CurrentSpell = UnlockedSpells[0].Type;
+        } else {
+            ChangeSpell(SpellIndex+1);
+            return;
+        }
 
         SpellCycle = SpellIndex;
 
@@ -153,7 +155,7 @@ public class SpellSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(Keybind))
         {
-            if (CurrentSpell == UnlockedSpells[Type].Type)
+            if (CurrentSpell == PlayerSpells[Type].Type)
                 ChangeSpell(0);
             else
                 ChangeSpell(Type);
