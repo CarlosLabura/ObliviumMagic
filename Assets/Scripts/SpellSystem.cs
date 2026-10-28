@@ -3,6 +3,13 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[System.Serializable]
+public struct SpellData
+{
+    public SpellType Type;
+    public bool Unlocked;
+    public UnityEngine.UI.Image SpellBox;
+}
 public class SpellSystem : MonoBehaviour
 {
     //hechizos
@@ -14,10 +21,10 @@ public class SpellSystem : MonoBehaviour
     private float FistTime = 0f;
     //variables internas
     [SerializeField] private GameObject Projectile;
-    [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] public SpellType[] UnlockedSpells = {SpellType.Fist};
+    [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] public SpellData[] UnlockedSpells;
+    private int SpellStart = 1; // index donde empiezan los hechizos sin contar los fists
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private GameObject FistHitbox;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private CursorReplace CursorReplace;
-    [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private TextMeshProUGUI SpellUI; //temporal
     private MovementSystem MovementSystem;
     public Vector3 GetCursorPosition()
     {
@@ -97,36 +104,59 @@ public class SpellSystem : MonoBehaviour
         // cambio de hechizos
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            ChangeSpell(SpellType.Fist);
+            ChangeSpell(0); //0 deberian ser los puños
         }
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
         {
             SpellCycle += 1;
             if (SpellCycle >= UnlockedSpells.Length)
-                SpellCycle = 1;
-            ChangeSpell(UnlockedSpells[SpellCycle]);
+                SpellCycle = SpellStart;
+            ChangeSpell(SpellCycle);
         } 
-        SpellKeybind(SpellType.Rock, KeyCode.Alpha1);
-        SpellKeybind(SpellType.Fire, KeyCode.Alpha2);
-        SpellKeybind(SpellType.Ice, KeyCode.Alpha3);
-        SpellKeybind(SpellType.Ray, KeyCode.Alpha4);
+        SpellKeybind(1, KeyCode.Alpha1); //el numero del hechizo se consigue por orden de añadido
+        SpellKeybind(2, KeyCode.Alpha2);
+        SpellKeybind(3, KeyCode.Alpha3);
+        SpellKeybind(4, KeyCode.Alpha4);
+
+        //hud de hechizos
+        for (int i = SpellStart; i < UnlockedSpells.Length; i++)
+        {
+            SpellData Spell = UnlockedSpells[i];
+            float alpha = 0f;
+            if (Spell.Unlocked)
+                alpha = 1f;
+            
+            float color = 0.5f;
+            if (i == SpellCycle)
+                color = 1f;
+
+            Spell.SpellBox.color = Color.Lerp(Spell.SpellBox.color, new Color(color, color, color, alpha), Time.deltaTime * 5);
+        }
     }
-    private void ChangeSpell(SpellType Spell)
+    private void ChangeSpell(int SpellIndex)
     {
-        if (UnlockedSpells.Contains(Spell))
-            CurrentSpell = Spell;
+        if (SpellIndex >= UnlockedSpells.Length || SpellIndex < 0)
+            SpellIndex = 0;
+
+        SpellData Spell = UnlockedSpells[SpellIndex];
+
+        if (Spell.Unlocked)
+            CurrentSpell = Spell.Type;
         else
-            CurrentSpell = UnlockedSpells[0];
+            CurrentSpell = UnlockedSpells[0].Type;
+
+        SpellCycle = SpellIndex;
+        if (SpellCycle < SpellStart)
+            SpellCycle = SpellStart;
         
         CursorReplace.ChangeCursor(CurrentSpell);
-        SpellUI.SetText(CurrentSpell.ToString());
     }
-    private void SpellKeybind(SpellType Type, KeyCode Keybind)
+    private void SpellKeybind(int Type, KeyCode Keybind)
     {
         if (Input.GetKeyDown(Keybind))
         {
-            if (CurrentSpell == Type)
-                ChangeSpell(SpellType.Fist);
+            if (CurrentSpell == UnlockedSpells[Type].Type)
+                ChangeSpell(0);
             else
                 ChangeSpell(Type);
         }
