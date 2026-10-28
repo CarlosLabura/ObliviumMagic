@@ -36,15 +36,15 @@ public class HealthSystem : MonoBehaviour
             return;
 
         Health -= Amount;
+        if (MovementSystem.Player) {
+            HUDBlood.SetHealth((float)Health / MaxHealth);
+            Invencible(1);
+            MovementSystem.Knockback(SpellSystem.GetCursorPosition(), 2);
+        }
         if (Health <= 0)
         {
             Destroy(gameObject);
             return;
-        }
-        if (MovementSystem.Player) {
-            HUDBlood.Health = 1 * Health;
-            Invencible(1);
-            MovementSystem.Knockback(SpellSystem.GetCursorPosition(), 2);
         }
     }
     /*

@@ -13,10 +13,13 @@ public class HUDBlood : MonoBehaviour
 
         Image = GetComponent<UnityEngine.UI.Image>();
     }
+    public void SetHealth(float healthAmount)
+    {
+        Health = healthAmount;
+    }
 
-    // Update is called once per frame
     void Update()
     {
-        Image.fillAmount = Health;
+        Image.fillAmount = Mathf.Lerp(Image.fillAmount, Health, Time.deltaTime*5);
     }
 }
