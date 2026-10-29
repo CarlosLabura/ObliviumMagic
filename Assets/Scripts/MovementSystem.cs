@@ -14,6 +14,9 @@ public class MovementSystem : MonoBehaviour
         los estados no se pueden modificar solo con la variable, si o si se tienen que aplicar
         con sus funciones respectivas y tener un tiempo de duracion. por eso estan ocultos en el inspector
         mantengo las variables publicas para que se puedan acceder desde otros scripts
+
+        no uso corrutinas ya que al menos por ahora no se si hay alguna manera de acumular los efectos con ellas
+        con el sistema actual se pueden acumular el tiempo de los efectos con presicion (precision*??)
     */
     [HideInInspector] public bool IsFreezed = false;
     private float FreezeTimer = 0f;

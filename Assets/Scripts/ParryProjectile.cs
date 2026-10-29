@@ -6,12 +6,12 @@ public class ParryProjectile : MonoBehaviour
         // si el enemigo recibe un trigger de la hitbox del player or el player recibe hitbox de un enemigo
         if (other.gameObject.CompareTag("EnemyHitbox") && gameObject.activeSelf)
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0f;
-
             other.gameObject.tag = "PlayerHitbox";
 
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0f;
             Vector2 projectileDirection = (mousePosition - transform.position).normalized;
+            
             other.gameObject.GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg;
             other.gameObject.GetComponent<Rigidbody2D>().AddForce(projectileDirection * 20f, ForceMode2D.Impulse);
         }
