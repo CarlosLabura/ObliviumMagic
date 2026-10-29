@@ -46,7 +46,7 @@ public class SpellSystem : MonoBehaviour
     }
     public void CastSpell(SpellType Type, Vector3 Target)
     {
-        if (Cooldown > 0 || MovementSystem.Stunned)
+        if (Cooldown > 0 || MovementSystem.IsStunned)
             return;
 
         switch (Type)

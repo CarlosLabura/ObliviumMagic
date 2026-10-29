@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
+
 
 public class HealthSystem : MonoBehaviour
 {
@@ -7,14 +9,14 @@ public class HealthSystem : MonoBehaviour
     [Min(0)] public int MaxHealth = 50;
     [Min(-1)] public int Health = 0;
     public SpellType Weakness;
-    // fuego
-    private int FireDamage = 1;
-    private float FireTimer = 0;
+    [Header("Fire Settings")]
+    public int FireDamage = 1;
+    [Min(0)] public float FireTimer = 1f;
     private int FireTicks = 0;
+    [HideInInspector] public bool IsOnFire = false;
     // invencibilidad
     // consultar que es un estado en MovementSystem.cs
-    [HideInInspector] public bool InvencibleState = false;
-    private float InvencibleTime = 0f;
+    [HideInInspector] public bool IsInvencible = false;
     // variables internas
     private MovementSystem MovementSystem;
     private SpellSystem SpellSystem;
@@ -27,12 +29,17 @@ public class HealthSystem : MonoBehaviour
     }
     public void Invencible(float Time)
     {
-        InvencibleState = true;
-        InvencibleTime = Time;
+        StartCoroutine(_Invencible(Time));
+    }
+    private IEnumerator _Invencible(float Time)
+    {
+        IsInvencible = true;
+        yield return new WaitForSeconds(Time);
+        IsInvencible = false;
     }
     public void Damage(int Amount)
     {
-        if (InvencibleState)
+        if (IsInvencible)
             return;
 
         Health -= Amount;
@@ -54,31 +61,22 @@ public class HealthSystem : MonoBehaviour
     */
     public void Fire(int Ticks)
     {
-        if (InvencibleState)
+        if (IsInvencible)
             return;
 
-        FireTicks += Ticks;
-        FireTimer = 1f;
+        StartCoroutine(_Fire(Ticks));
     }
-    void Update()
+    private IEnumerator _Fire(int Ticks)
     {
-        if (InvencibleTime > 0){
-            InvencibleTime -= Time.deltaTime;
-        } else {
-            if (InvencibleState)
-                InvencibleState = false;
+        IsOnFire = true;
+        FireTicks = Ticks;
+        while (FireTicks > 0)
+        {
+            yield return new WaitForSeconds(FireTimer);
+            FireTicks -= 1;
+            Damage(FireDamage);
         }
-
-        if (FireTimer > 0) {
-            FireTimer -= Time.deltaTime;
-        } else {
-            if (FireTicks > 0)
-            {
-                FireTicks -= 1;
-                FireTimer = 1f;
-                Damage(FireDamage);
-            }
-        }
+        IsOnFire = false;
     }
     void OnTriggerEnter2D(Collider2D other) {
         // si el enemigo recibe un trigger de la hitbox del player or el player recibe hitbox de un enemigo

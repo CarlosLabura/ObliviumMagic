@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class MovementSystem : MonoBehaviour
 {
@@ -14,10 +15,8 @@ public class MovementSystem : MonoBehaviour
         con sus funciones respectivas y tener un tiempo de duracion. por eso estan ocultos en el inspector
         mantengo las variables publicas para que se puedan acceder desde otros scripts
     */
-    [HideInInspector] public bool Freezed = false;
-    [HideInInspector] public bool Stunned = false;
-    private float FreezeTimer = 0;
-    private float StunTimer = 0;
+    [HideInInspector] public bool IsFreezed = false;
+    [HideInInspector] public bool IsStunned = false;
     // camara
     [ShowIf("Player")] [Header("Player Settings")]
     [Min(0)] public float CameraSensivility = 1f;
@@ -28,17 +27,27 @@ public class MovementSystem : MonoBehaviour
     void Start()
     {
         SpellSystem = GetComponent<SpellSystem>();
-        RigidBody2D = GetComponent<Rigidbody2D>(); 
+        RigidBody2D = GetComponent<Rigidbody2D>();
     }
     public void Freeze(float Time)
     {
-        Freezed = true;
-        FreezeTimer = Time;
+        StartCoroutine(_Freeze(Time));
+    }
+    private IEnumerator _Freeze(float Time)
+    {
+        IsFreezed = true;
+        yield return new WaitForSeconds(Time);
+        IsFreezed = false;
     }
     public void Stun(float Time)
     {
-        Stunned = true;
-        StunTimer = Time;
+        StartCoroutine(_Stun(Time));
+    }
+    private IEnumerator _Stun(float Time)
+    {
+        IsStunned = true;
+        yield return new WaitForSeconds(Time);
+        IsStunned = false;
     }
     public void Knockback(Vector3 position, float Force)
     {
@@ -63,21 +72,8 @@ public class MovementSystem : MonoBehaviour
             RigidBody2D.rotation = Mathf.Atan2(rotationDirection.y, rotationDirection.x) * Mathf.Rad2Deg -90f;
         }
 
-        if (FreezeTimer > 0) {
-            FreezeTimer -= Time.deltaTime;
-        } else {
-            FreezeTimer = 0;
-            Freezed = false;
-        }
-
-        if (StunTimer > 0) {
-            StunTimer -= Time.deltaTime;
-        } else {
-            StunTimer = 0;
-            Stunned = false;
-        }
-
-        if (Stunned)
+        // a partir de aca no se ejecuta nada si estas stuneado
+        if (IsStunned)
             return;
 
         if (Player) {
@@ -86,11 +82,10 @@ public class MovementSystem : MonoBehaviour
                 ActualSpeed = Speed * CrouchMultiplier;
         }
 
-        if (Freezed)
-            ActualSpeed = Speed * CrouchMultiplier;
+        if (IsFreezed)
+            ActualSpeed = Speed * (CrouchMultiplier * 0.5f);
         else
             ActualSpeed = Speed;
-
     }
     void FixedUpdate()
     {
