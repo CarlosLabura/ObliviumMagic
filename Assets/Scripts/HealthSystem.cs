@@ -10,8 +10,9 @@ public class HealthSystem : MonoBehaviour
     [Min(-1)] public int Health = 0;
     public SpellType Weakness;
     [Header("Fire Settings")]
-    public int FireDamage = 1;
-    [Min(0)] public float FireTimer = 1f;
+    [Min(0)] public int FireDamage = 1;
+    [Min(0)] public float FireGap = 1f;
+    private float FireTimer = 0;
     private int FireTicks = 0;
     [HideInInspector] public bool IsOnFire = false;
     // invencibilidad
@@ -37,7 +38,7 @@ public class HealthSystem : MonoBehaviour
         yield return new WaitForSeconds(Time);
         IsInvencible = false;
     }
-    public void Damage(int Amount)
+    public void Damage(int Amount, bool Knockback = true)
     {
         if (IsInvencible)
             return;
@@ -45,8 +46,10 @@ public class HealthSystem : MonoBehaviour
         Health -= Amount;
         if (MovementSystem.Player) {
             HUDBlood.SetHealth((float)Health / MaxHealth);
-            Invencible(1);
-            MovementSystem.Knockback(SpellSystem.GetCursorPosition(), 2);
+            if (Knockback) {
+                Invencible(1);
+                MovementSystem.Knockback(SpellSystem.GetCursorPosition(), 2);
+            }
         }
         if (Health <= 0)
         {
@@ -59,24 +62,29 @@ public class HealthSystem : MonoBehaviour
         lentamente con ticks de 1 segundo, hay una cantidad de ticks restantes que al pasar un segundo
         se sacan del contador y se restan de la vida
     */
-    public void Fire(int Ticks)
+   public void Fire(int Ticks)
     {
         if (IsInvencible)
             return;
 
-        StartCoroutine(_Fire(Ticks));
-    }
-    private IEnumerator _Fire(int Ticks)
-    {
         IsOnFire = true;
-        FireTicks = Ticks;
-        while (FireTicks > 0)
-        {
-            yield return new WaitForSeconds(FireTimer);
-            FireTicks -= 1;
-            Damage(FireDamage);
+        FireTicks += Ticks;
+        FireTimer = FireGap;
+    }
+    void Update()
+    {
+        if (FireTimer > 0) {
+            FireTimer -= Time.deltaTime;
+        } else {
+            if (FireTicks > 0)
+            {
+                FireTicks -= 1;
+                FireTimer = FireGap;
+                Damage(FireDamage, false);
+            } else {
+                IsOnFire = false;
+            }
         }
-        IsOnFire = false;
     }
     void OnTriggerEnter2D(Collider2D other) {
         // si el enemigo recibe un trigger de la hitbox del player or el player recibe hitbox de un enemigo
