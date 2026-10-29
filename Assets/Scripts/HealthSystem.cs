@@ -18,6 +18,7 @@ public class HealthSystem : MonoBehaviour
     // invencibilidad
     // consultar que es un estado en MovementSystem.cs
     [HideInInspector] public bool IsInvencible = false;
+    private float InvencibleTimer = 0f;
     // variables internas
     private MovementSystem MovementSystem;
     private SpellSystem SpellSystem;
@@ -30,13 +31,8 @@ public class HealthSystem : MonoBehaviour
     }
     public void Invencible(float Time)
     {
-        StartCoroutine(_Invencible(Time));
-    }
-    private IEnumerator _Invencible(float Time)
-    {
         IsInvencible = true;
-        yield return new WaitForSeconds(Time);
-        IsInvencible = false;
+        InvencibleTimer = Time;
     }
     public void Damage(int Amount, bool Knockback = true)
     {
@@ -73,6 +69,13 @@ public class HealthSystem : MonoBehaviour
     }
     void Update()
     {
+        if (InvencibleTimer > 0){
+            InvencibleTimer -= Time.deltaTime;
+        } else {
+            if (IsInvencible)
+                IsInvencible = false;
+        }
+
         if (FireTimer > 0) {
             FireTimer -= Time.deltaTime;
         } else {
@@ -112,7 +115,7 @@ public class HealthSystem : MonoBehaviour
                         MovementSystem.Freeze(3f);
                         break;
                     case SpellType.Ray:
-                        Damage(10);
+                        Damage(10, false);
                         MovementSystem.Stun(1f);
                         break;
                     default:

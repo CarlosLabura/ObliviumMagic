@@ -2544,6 +2544,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1203877543}
     - target: {fileID: 7799931089850297183, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
+      propertyPath: Weakness
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799931089850297183, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
       propertyPath: FireDamage
       value: 5
       objectReference: {fileID: 0}
@@ -2606,7 +2610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5754333175678520706, guid: fcb9eb7917a2aac4b8298abb510f4f03, type: 3}
       propertyPath: CurrentSpell
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7521559408632948322, guid: fcb9eb7917a2aac4b8298abb510f4f03, type: 3}
       propertyPath: Target

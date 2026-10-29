@@ -16,7 +16,9 @@ public class MovementSystem : MonoBehaviour
         mantengo las variables publicas para que se puedan acceder desde otros scripts
     */
     [HideInInspector] public bool IsFreezed = false;
+    private float FreezeTimer = 0f;
     [HideInInspector] public bool IsStunned = false;
+    private float StunTimer = 0f;
     // camara
     [ShowIf("Player")] [Header("Player Settings")]
     [Min(0)] public float CameraSensivility = 1f;
@@ -31,23 +33,13 @@ public class MovementSystem : MonoBehaviour
     }
     public void Freeze(float Time)
     {
-        StartCoroutine(_Freeze(Time));
-    }
-    private IEnumerator _Freeze(float Time)
-    {
         IsFreezed = true;
-        yield return new WaitForSeconds(Time);
-        IsFreezed = false;
+        FreezeTimer = Time;
     }
     public void Stun(float Time)
     {
-        StartCoroutine(_Stun(Time));
-    }
-    private IEnumerator _Stun(float Time)
-    {
         IsStunned = true;
-        yield return new WaitForSeconds(Time);
-        IsStunned = false;
+        StunTimer = Time;
     }
     public void Knockback(Vector3 position, float Force)
     {
@@ -70,6 +62,20 @@ public class MovementSystem : MonoBehaviour
             
             Vector2 rotationDirection = (mousePosition - transform.position).normalized;
             RigidBody2D.rotation = Mathf.Atan2(rotationDirection.y, rotationDirection.x) * Mathf.Rad2Deg -90f;
+        }
+
+        if (FreezeTimer > 0) {
+            FreezeTimer -= Time.deltaTime;
+        } else {
+            FreezeTimer = 0;
+            IsFreezed = false;
+        }
+
+        if (StunTimer > 0) {
+            StunTimer -= Time.deltaTime;
+        } else {
+            StunTimer = 0;
+            IsStunned = false;
         }
 
         // a partir de aca no se ejecuta nada si estas stuneado
