@@ -107,8 +107,8 @@ public class HealthSystem : MonoBehaviour
                         Damage(10);
                         break;
                     case SpellType.Fire:
-                        Damage(8);
                         Fire(3);
+                        Damage(8);
                         break;
                     case SpellType.Ice:
                         Damage(10);

@@ -175,8 +175,8 @@ MonoBehaviour:
   Player: 0
   Speed: 2.5
   MoveVector: {x: 0, y: 0}
-  Freezed: 0
-  Stunned: 0
+  IsFreezed: 0
+  IsStunned: 0
   CameraSensivility: 1
 --- !u!114 &4996562564698489956
 MonoBehaviour:
@@ -192,8 +192,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   MaxHealth: 50
   Health: 50
-  Weakness: 1
-  InvencibleState: 1
+  Weakness: 2
+  FireDamage: 1
+  FireGap: 1
+  IsOnFire: 0
+  IsInvencible: 0
   HUDBlood: {fileID: 0}
 --- !u!114 &5754333175678520706
 MonoBehaviour:
@@ -207,13 +210,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0692fc7ff694e45aee0e1bb9c2bee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpellSystem
-  CurrentSpell: 1
+  CurrentSpell: 2
   SpellCooldown: 1.38
   Projectile: {fileID: 5738630424762621211, guid: a05f28d6fba084f4d9cdfced131f72f2, type: 3}
-  UnlockedSpells: 01000000
+  PlayerSpells: []
   FistHitbox: {fileID: 0}
   CursorReplace: {fileID: 0}
-  SpellUI: {fileID: 0}
 --- !u!114 &7521559408632948322
 MonoBehaviour:
   m_ObjectHideFlags: 0

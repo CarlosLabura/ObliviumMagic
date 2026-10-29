@@ -175,8 +175,8 @@ MonoBehaviour:
   Player: 1
   Speed: 5
   MoveVector: {x: 0, y: 0}
-  Freezed: 0
-  Stunned: 0
+  IsFreezed: 0
+  IsStunned: 0
   CameraSensivility: 10
 --- !u!114 &7799931089850297183
 MonoBehaviour:
@@ -192,8 +192,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
   MaxHealth: 50
   Health: 50
-  Weakness: 5
-  InvencibleState: 0
+  Weakness: 2
+  FireDamage: 1
+  FireGap: 1
+  IsOnFire: 0
+  IsInvencible: 0
   HUDBlood: {fileID: 0}
 --- !u!114 &4603437217764618328
 MonoBehaviour:
