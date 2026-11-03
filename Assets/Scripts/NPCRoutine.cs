@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum NPCState { Patrol, Following, Attacking, Searching }
+public enum NPCState { Patrol, Following, Attacking, Searching, Zombie }
 
 public class NPCRoutine : MonoBehaviour
 {
@@ -137,6 +137,16 @@ public class NPCRoutine : MonoBehaviour
             return;
         }
     }
+    private void Zombie(Vector2 target)
+    {
+        Vector2 diff = target - RigidBody2D.position;
+        float dist = diff.magnitude;
+
+        float step = MovementSystem.Speed * Time.fixedDeltaTime;
+
+        MovementSystem.MoveVector = dist < step ? diff / step : diff / dist;
+        Rotate(target);
+    }
     void Update()
     {
         Vector2 TargetPos = Target.position;
@@ -144,7 +154,8 @@ public class NPCRoutine : MonoBehaviour
         if (CanSee(TargetPos))
             LastSeenPosition = TargetPos;
 
-             if (State == NPCState.Patrol)    Patrol(TargetPos);
+             if (State == NPCState.Zombie)    Zombie(TargetPos);
+        else if (State == NPCState.Patrol)    Patrol(TargetPos);
         else if (State == NPCState.Following) Move(TargetPos);
         else if (State == NPCState.Attacking) Attack(TargetPos);
         else if (State == NPCState.Searching) Search(LastSeenPosition);
