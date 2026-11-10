@@ -49,7 +49,6 @@ public class NPCDialogue : MonoBehaviour
             SetDialogue(false);
             Talked = true;
         }
-            
     }
     void Update()
     {
