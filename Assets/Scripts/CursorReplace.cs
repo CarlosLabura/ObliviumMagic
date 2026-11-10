@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class CursorReplace : MonoBehaviour
 {
     private Animator Animator;

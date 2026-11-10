@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-
 public class MovementSystem : MonoBehaviour
 {
     public bool Player = false;
@@ -56,8 +54,8 @@ public class MovementSystem : MonoBehaviour
             Vector3 mousePosition = SpellSystem.GetCursorPosition();
             
             Vector3 target = new Vector3(
-                transform.position.x + ((transform.position.x + mousePosition.x) / 2) / CameraSensivility,
-                transform.position.y + ((transform.position.y + mousePosition.y) / 2) / CameraSensivility,
+                transform.position.x + (transform.position.x + mousePosition.x) * 0.5f / CameraSensivility,
+                transform.position.y + (transform.position.y + mousePosition.y) * 0.5f / CameraSensivility,
                 Camera.main.transform.position.z
             );
 

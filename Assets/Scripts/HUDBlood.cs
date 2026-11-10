@@ -1,18 +1,17 @@
-using Microsoft.Unity.VisualStudio.Editor;
+using UnityEngine.UI;
 using UnityEngine;
-
 public class HUDBlood : MonoBehaviour
 {
     [SerializeField] private Animator BloodBall;
     [HideInInspector] public float Health = 1f;
     private Animator Animator;
-    private UnityEngine.UI.Image Image;
+    private Image Image;
     void Start()
     {
         Animator = GetComponent<Animator>();
         Animator.Play("Blood");
 
-        Image = GetComponent<UnityEngine.UI.Image>();
+        Image = GetComponent<Image>();
     }
     public void SetHealth(float healthAmount)
     {

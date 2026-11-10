@@ -1,8 +1,4 @@
-using TMPro;
 using UnityEngine;
-using System.Collections;
-
-
 public class HealthSystem : MonoBehaviour
 {
     [Header("Health Settings")]

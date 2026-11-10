@@ -1,12 +1,11 @@
 using TMPro;
 using UnityEngine;
-
 public class NPCDialogue : MonoBehaviour
 {
     [Header("Dialogue Options")]
     public string DialoguePortrait;
-    public float TalkSpeed;
-    public float TalkDelay;
+    [Min(0)] public float TalkSpeed;
+    [Min(0)] public float TalkDelay;
     [Multiline] public string[] Dialogue;
     [Header("Text Box Objects")]
     [SerializeField] private GameObject Parent;

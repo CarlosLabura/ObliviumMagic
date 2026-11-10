@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class ParryProjectile : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other) {

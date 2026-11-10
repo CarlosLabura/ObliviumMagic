@@ -3,7 +3,6 @@ public enum SpellType {Fist, Rock, Fire, Ice, Ray, None}
 public class SpellTypeScript : MonoBehaviour { 
     public SpellType Type; 
 }
-
 /*
     COMO AÑADIR NUEVOS HECHIZOS: (en caso de ser necesario)
     1. Añadir a SpellType su nombre clave 

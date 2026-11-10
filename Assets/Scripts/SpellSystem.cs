@@ -1,14 +1,11 @@
-using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 [System.Serializable]
 public struct SpellData
 {
     public SpellType Type;
     public bool Unlocked;
-    public UnityEngine.UI.Image SpellBox;
+    public Image SpellBox;
 }
 public class SpellSystem : MonoBehaviour
 {

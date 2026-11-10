@@ -1,8 +1,5 @@
-using System;
 using UnityEngine;
-
 public enum NPCState { Patrol, Following, Attacking, Searching, Zombie, Face }
-
 public class NPCRoutine : MonoBehaviour
 {
     public NPCState State = NPCState.Following;
@@ -106,7 +103,6 @@ public class NPCRoutine : MonoBehaviour
         SpellSystem.CastSpell(SpellSystem.CurrentSpell, target);
         Rotate(target);
     }
-
     public void Search(Vector2 lastSeen)
     {
         if (CanSee(Target.position))
