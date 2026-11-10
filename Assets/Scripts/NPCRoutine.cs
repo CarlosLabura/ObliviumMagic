@@ -23,6 +23,9 @@ public class NPCRoutine : MonoBehaviour
     }
     public void Rotate(Vector3 position)
     {
+        if (!CanSee(position))
+            return;
+
         Vector2 direction = (position - transform.position).normalized;
         RigidBody2D.rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
     }
@@ -37,7 +40,7 @@ public class NPCRoutine : MonoBehaviour
         }
         return false;
     }
-    private bool CanSee(Vector2 target)
+    public bool CanSee(Vector2 target)
     {
         return (target - RigidBody2D.position).magnitude < SightLost && !objectBetween(target);
     }
