@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum NPCState { Patrol, Following, Attacking, Searching, Zombie }
+public enum NPCState { Patrol, Following, Attacking, Searching, Zombie, Face }
 
 public class NPCRoutine : MonoBehaviour
 {
@@ -155,6 +155,7 @@ public class NPCRoutine : MonoBehaviour
             LastSeenPosition = TargetPos;
 
              if (State == NPCState.Zombie)    Zombie(TargetPos);
+        else if (State == NPCState.Face)      Rotate(TargetPos);
         else if (State == NPCState.Patrol)    Patrol(TargetPos);
         else if (State == NPCState.Following) Move(TargetPos);
         else if (State == NPCState.Attacking) Attack(TargetPos);
