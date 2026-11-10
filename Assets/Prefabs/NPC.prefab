@@ -171,8 +171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCRoutine
   State: 5
-  ShootingDistance: 5
-  SightLost: 10
+  ShootingDistance: 0
+  SightLost: 3
   Target: {fileID: 0}
 --- !u!114 &8809333902085589798
 MonoBehaviour:
@@ -187,10 +187,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
   DialoguePortrait: dad
-  TalkSpeed: 0
-  TalkDelay: 0
+  TalkSpeed: 0.05
+  TalkDelay: 3
   Dialogue:
   - advinculaaaaaaaa
   - quiero keke??
   - que mandan
+  Parent: {fileID: 0}
   Text: {fileID: 0}
+  Talking: 0
