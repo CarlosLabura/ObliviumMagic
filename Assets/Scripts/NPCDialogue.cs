@@ -19,6 +19,7 @@ public class NPCDialogue : MonoBehaviour
     private float TalkTimer = 0; // timer entre cada letra
     private float DelayTimer = 0; // timer para que pase al siguiente texto
     private NPCRoutine NPCRoutine;
+    private bool Talked = false;
     void Start()
     {
         NPCRoutine = GetComponent<NPCRoutine>();
@@ -27,6 +28,7 @@ public class NPCDialogue : MonoBehaviour
     {
         CurrentCharacter = 0;
         ActualText = "";
+        Text.SetText(ActualText);
         TalkTimer = 0;
         DelayTimer = 0;
     }
@@ -43,14 +45,20 @@ public class NPCDialogue : MonoBehaviour
         RestartDialogue();
         CurrentText += 1;
 
-        if (CurrentText == Dialogue.Length)
+        if (CurrentText == Dialogue.Length) {
             SetDialogue(false);
+            Talked = true;
+        }
             
     }
     void Update()
     {
-        if (NPCRoutine.CanSee(NPCRoutine.Target.position) && !Talking)
+        if (NPCRoutine.CanSee(NPCRoutine.Target.position) && !Talking && !Talked)
             SetDialogue(true);
+        else if (!NPCRoutine.CanSee(NPCRoutine.Target.position)){
+            SetDialogue(false);
+            Talked = false;
+        }
 
         if (ActualText == Dialogue[CurrentText])
         {   
