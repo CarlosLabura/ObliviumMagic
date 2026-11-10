@@ -11,6 +11,7 @@ public class NPCDialogue : MonoBehaviour
     [Header("Text Box Objects")]
     [SerializeField] private GameObject Parent;
     [SerializeField] private TextMeshProUGUI Text;
+    [SerializeField] private Animator Portrait;
     //variables internas
     [HideInInspector] public bool Talking = false;
     private int CurrentText = 0; // numero del texto que se esta escribiendo
@@ -31,11 +32,13 @@ public class NPCDialogue : MonoBehaviour
         Text.SetText(ActualText);
         TalkTimer = 0;
         DelayTimer = 0;
+        Portrait.speed = 1f;
     }
     void SetDialogue(bool Active)
     {
         RestartDialogue();
         CurrentText = 0;
+        Portrait.Play(DialoguePortrait.ToLower());
 
         Parent.SetActive(Active);
         Talking = Active;
@@ -61,6 +64,7 @@ public class NPCDialogue : MonoBehaviour
 
         if (ActualText == Dialogue[CurrentText])
         {   
+            Portrait.speed = 0f;
             DelayTimer += Time.deltaTime;
             if (DelayTimer < TalkDelay)
                 return;
