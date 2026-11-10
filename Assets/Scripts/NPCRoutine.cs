@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum NPCState { Patrol, Following, Attacking, Searching, Zombie, Face }
@@ -27,7 +28,7 @@ public class NPCRoutine : MonoBehaviour
             return;
 
         Vector2 direction = (position - transform.position).normalized;
-        RigidBody2D.rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        RigidBody2D.rotation = Mathf.Lerp(RigidBody2D.rotation, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f, Time.deltaTime*5);
     }
     private bool objectBetween(Vector2 target, string Tag = "Wall")
     {
