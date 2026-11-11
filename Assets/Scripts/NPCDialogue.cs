@@ -3,14 +3,14 @@ using UnityEngine;
 public class NPCDialogue : MonoBehaviour
 {
     [Header("Dialogue Options")]
-    public string DialoguePortrait;
-    [Min(0)] public float TalkSpeed;
-    [Min(0)] public float TalkDelay;
+    public string DialoguePortrait = "dad";
+    [Min(0)] public float TalkSpeed = 0.05f;
+    [Min(0)] public float TalkDelay = 3;
     [Multiline] public string[] Dialogue;
     [Header("Text Box Objects")]
     [SerializeField] private GameObject Parent;
     [SerializeField] private TextMeshProUGUI Text;
-    [SerializeField] private Animator Portrait;
+    public Animator Portrait; //publica para que pueda ser accedida por la tienda
     //variables internas
     [HideInInspector] public bool Talking = false;
     private int CurrentText = 0; // numero del texto que se esta escribiendo
@@ -18,8 +18,9 @@ public class NPCDialogue : MonoBehaviour
     private string ActualText; // texto que se esta escribiendo
     private float TalkTimer = 0; // timer entre cada letra
     private float DelayTimer = 0; // timer para que pase al siguiente texto
+    private bool Talked = false; // termino de hablar
+    private bool Forced = false; //forzar a que aparezca el texto
     private NPCRoutine NPCRoutine;
-    private bool Talked = false;
     void Start()
     {
         NPCRoutine = GetComponent<NPCRoutine>();
@@ -33,32 +34,43 @@ public class NPCDialogue : MonoBehaviour
         DelayTimer = 0;
         Portrait.speed = 1f;
     }
-    void SetDialogue(bool Active)
+    public void SetDialogue(bool Active, bool Force = false)
     {
+        Parent.SetActive(Active);
         RestartDialogue();
         CurrentText = 0;
         Portrait.Play(DialoguePortrait.ToLower());
-
-        Parent.SetActive(Active);
         Talking = Active;
+        Forced = Force;
     }
     void NextDialogue()
     {
         RestartDialogue();
         CurrentText += 1;
 
-        if (CurrentText == Dialogue.Length) {
-            SetDialogue(false);
-            Talked = true;
-        }
+        if (CurrentText == Dialogue.Length)
+            FinishDialogue();
+    }
+    public void StartDialogue(bool Force = false)
+    {
+        SetDialogue(true, Force);
+    }
+    public void FinishDialogue()
+    {
+        SetDialogue(false);
+        Talked = false;
     }
     void Update()
     {
-        if (NPCRoutine.CanSee(NPCRoutine.Target.position) && !Talking && !Talked)
-            SetDialogue(true);
-        else if (!NPCRoutine.CanSee(NPCRoutine.Target.position)){
-            SetDialogue(false);
-            Talked = false;
+        if (!Forced) {
+            if (NPCRoutine.CanSee(NPCRoutine.Target.position) && !Talking && !Talked)
+                StartDialogue();
+            else if (!NPCRoutine.CanSee(NPCRoutine.Target.position))
+                FinishDialogue();
+        } else
+        {
+            if (!Talking && !Talked)
+                StartDialogue();
         }
 
         if (ActualText == Dialogue[CurrentText])
