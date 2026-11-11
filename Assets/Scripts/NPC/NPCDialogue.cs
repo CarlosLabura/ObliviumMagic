@@ -13,7 +13,6 @@ public class NPCDialogue : MonoBehaviour
     public Animator Portrait;
     //variables internas
     [HideInInspector] public bool Talking = false;
-    private string[] Dialogues;
     private int CurrentText = 0; // numero del texto que se esta escribiendo
     private int CurrentCharacter = 0; //numero de letra que se tiene que escribir en pantalla
     private string ActualText; // texto que se esta escribiendo
@@ -37,7 +36,6 @@ public class NPCDialogue : MonoBehaviour
     void SetDialogue(bool Active)
     {
         RestartDialogue();
-        Dialogues = Dialogue;
         CurrentText = 0;
         Portrait.Play(DialoguePortrait.ToLower());
 
@@ -56,14 +54,20 @@ public class NPCDialogue : MonoBehaviour
     }
     void Update()
     {
+        //REHACER PARA QUE FUNQUE CON DIFERENTES NPCS
+        //AHORA SE BUGEA Y MUESTRA 2 MENSAJES AL MISMO TIEMPO????
+        //UNITY ESTA GAGA
+        //TEL AVIV NO LES ESTA MANDANDO SUFICIENTES RECURSOS
+        /*
         if (NPCRoutine.CanSee(NPCRoutine.Target.position) && !Talking && !Talked)
             SetDialogue(true);
         else if (!NPCRoutine.CanSee(NPCRoutine.Target.position) && Talking){
             SetDialogue(false);
             Talked = false;
         }
+        */
 
-        if (ActualText == Dialogues[CurrentText])
+        if (ActualText == Dialogue[CurrentText])
         {   
             Portrait.speed = 0f;
             DelayTimer += Time.deltaTime;
@@ -77,7 +81,7 @@ public class NPCDialogue : MonoBehaviour
         if (TalkTimer >= TalkSpeed)
         {
             TalkTimer = 0;
-            ActualText += Dialogues[CurrentText][CurrentCharacter];
+            ActualText += Dialogue[CurrentText][CurrentCharacter];
             Text.SetText(ActualText);
             CurrentCharacter += 1;
         }
