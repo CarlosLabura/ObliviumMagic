@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-
 public class ShopScript : MonoBehaviour
 {
     [SerializeField] private Animator Background;

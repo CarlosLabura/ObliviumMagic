@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class ShopActivator : MonoBehaviour
 {
     [SerializeField] private ShopScript ShopScript;
