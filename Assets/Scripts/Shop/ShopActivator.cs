@@ -2,27 +2,27 @@ using UnityEngine;
 public class ShopActivator : MonoBehaviour
 {
     [SerializeField] private ShopScript ShopScript;
-    public float Cooldown = 5f;
-    private bool EnteredShop = false;
-    private float CooldownTimer = 0f; 
-    void OnCollisionEnter2D(Collision2D collision)
+    [HideInInspector] public bool InShop = false;
+    private NPCRoutine NPCRoutine;
+    private NPCDialogue NPCDialogue;
+    void Start()
     {
-        if (collision.gameObject.CompareTag("Player") && !EnteredShop && CooldownTimer <= 0) {
-            ShopScript.SetShop(true);
-            EnteredShop = true;
-        }
+        NPCRoutine = GetComponent<NPCRoutine>();
+        NPCDialogue = GetComponent<NPCDialogue>();
+    }
+    void SetShop(bool Active)
+    {
+        ShopScript.SetShop(Active);
+        InShop = Active;
     }
     void Update()
     {
-        if (CooldownTimer > 0)
-            CooldownTimer -= Time.deltaTime;
-    }
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && EnteredShop) {
-            EnteredShop = false;
-            CooldownTimer = Cooldown;
-        }
+        if (NPCRoutine.CanSee(NPCRoutine.Target.position) && !InShop)
+            SetShop(true);
+        else if (!NPCRoutine.CanSee(NPCRoutine.Target.position))
+            SetShop(false);
+
+        ShopScript.Background.speed = NPCDialogue.Portrait.speed;
     }
 
 }

@@ -1,5 +1,5 @@
 using UnityEngine;
-public enum NPCState { Patrol, Following, Attacking, Searching, Zombie, Face }
+public enum NPCState { Patrol, Following, Attacking, Searching, Zombie, Face, Static }
 public class NPCRoutine : MonoBehaviour
 {
     public NPCState State = NPCState.Following;
@@ -153,12 +153,29 @@ public class NPCRoutine : MonoBehaviour
 
         if (CanSee(TargetPos))
             LastSeenPosition = TargetPos;
-
-             if (State == NPCState.Zombie)    Zombie(TargetPos);
-        else if (State == NPCState.Face)      Rotate(TargetPos);
-        else if (State == NPCState.Patrol)    Patrol(TargetPos);
-        else if (State == NPCState.Following) Move(TargetPos);
-        else if (State == NPCState.Attacking) Attack(TargetPos);
-        else if (State == NPCState.Searching) Search(LastSeenPosition);
+            
+        switch (State)
+        {
+            case NPCState.Zombie:
+                Zombie(TargetPos);
+                break;
+            case NPCState.Face:
+                Rotate(TargetPos);
+                break;
+            case NPCState.Patrol:
+                Patrol(TargetPos);
+                break;
+            case NPCState.Following:
+                Move(TargetPos);
+                break;
+            case NPCState.Attacking:
+                Attack(TargetPos);
+                break;
+            case NPCState.Searching:
+                Search(LastSeenPosition);
+                break;
+            default:
+                break;
+        }
     }
 }

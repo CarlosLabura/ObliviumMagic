@@ -787,7 +787,6 @@ GameObject:
   m_Component:
   - component: {fileID: 427268628}
   - component: {fileID: 427268630}
-  - component: {fileID: 427268629}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -816,29 +815,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &427268629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427268627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b99def9b8762c3840be7870bd836f1f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
-  DialoguePortrait: dad
-  TalkSpeed: 0.05
-  TalkDelay: 3
-  Dialogue:
-  - compra lo que quieras pibe
-  - todo va a la casa...
-  - mentira
-  Parent: {fileID: 593239381}
-  Text: {fileID: 811417281}
-  Portrait: {fileID: 2058392340}
-  Talking: 0
 --- !u!114 &427268630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2055,6 +2031,8 @@ GameObject:
   - component: {fileID: 1285271648}
   - component: {fileID: 1285271647}
   - component: {fileID: 1285271650}
+  - component: {fileID: 1285271652}
+  - component: {fileID: 1285271651}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -2196,6 +2174,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopActivator
   ShopScript: {fileID: 427268630}
   Cooldown: 5
+  InShop: 0
+--- !u!114 &1285271651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285271646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99def9b8762c3840be7870bd836f1f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
+  DialoguePortrait: dad
+  TalkSpeed: 0.05
+  TalkDelay: 3
+  Dialogue:
+  - que onda paaa
+  - compra lo q quieras tranqui
+  - va la casa...
+  - mentira
+  Parent: {fileID: 593239381}
+  Text: {fileID: 811417281}
+  Portrait: {fileID: 2058392340}
+  Talking: 0
+--- !u!114 &1285271652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285271646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f5eb1a850dd7b4f87a7b986b7934ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCRoutine
+  State: 6
+  ShootingDistance: 0
+  SightLost: 3
+  Target: {fileID: 672573450}
 --- !u!1 &1367279251
 GameObject:
   m_ObjectHideFlags: 0
