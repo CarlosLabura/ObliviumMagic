@@ -1,7 +1,18 @@
 using UnityEngine;
-public class ShopActivator : MonoBehaviour
+using UnityEngine.UI;
+[System.Serializable]
+public struct ShopData
 {
-    [SerializeField] private ShopScript ShopScript;
+    public string Name;
+    [Min(0)] public float Price;
+    [Min(0)] public int Amount;
+    public Image Image;
+}
+public class ShopSystem : MonoBehaviour
+{   
+    public ShopData[] Items;
+    public bool Closed = false;
+    [SerializeField] private ShopHUD ShopScript;
     [HideInInspector] public bool InShop = false;
     private NPCRoutine NPCRoutine;
     private NPCDialogue NPCDialogue;
@@ -17,6 +28,9 @@ public class ShopActivator : MonoBehaviour
     }
     void Update()
     {
+        if (Closed)
+            return;
+            
         if (NPCRoutine.CanSee(NPCRoutine.Target.position) && !InShop)
             SetShop(true);
         else if (!NPCRoutine.CanSee(NPCRoutine.Target.position))

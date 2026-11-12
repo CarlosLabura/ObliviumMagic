@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5178122449435255295}
   - component: {fileID: 7799931089850297183}
   - component: {fileID: 4603437217764618328}
+  - component: {fileID: 7415830279388841210}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -231,6 +232,21 @@ MonoBehaviour:
     SpellBox: {fileID: 0}
   FistHitbox: {fileID: 8496479818883155216}
   CursorReplace: {fileID: 0}
+--- !u!114 &7415830279388841210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7605721753905106305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88000f8b18d64164e882629c1acab98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySystem
+  Items:
+  - Name: Fruit
+    Amount: 0
 --- !u!1 &8496479818883155216
 GameObject:
   m_ObjectHideFlags: 0

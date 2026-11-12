@@ -1,5 +1,7 @@
 using UnityEngine;
-public class ShopScript : MonoBehaviour
+using UnityEngine.UI;
+
+public class ShopHUD : MonoBehaviour
 {
     public Animator Background;
     public void SetShop(bool Active)
