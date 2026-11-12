@@ -10,8 +10,8 @@ public struct ShopData
 }
 public class ShopSystem : MonoBehaviour
 {   
-    public ShopData[] Items;
     public bool Closed = false;
+    public ShopData[] Items;
     [SerializeField] private ShopHUD ShopScript;
     [HideInInspector] public bool InShop = false;
     private NPCRoutine NPCRoutine;
@@ -30,7 +30,7 @@ public class ShopSystem : MonoBehaviour
     {
         if (Closed)
             return;
-            
+
         if (NPCRoutine.CanSee(NPCRoutine.Target.position) && !InShop)
             SetShop(true);
         else if (!NPCRoutine.CanSee(NPCRoutine.Target.position))
