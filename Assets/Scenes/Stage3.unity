@@ -2173,6 +2173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63e0b00da99938478f94c9f32a35612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopActivator
+  Items:
+  - Name: Fruit
+    Price: 50
+    Amount: 1
+    Image: {fileID: 0}
+  Closed: 0
   ShopScript: {fileID: 427268630}
   InShop: 0
 --- !u!114 &1285271651
@@ -2198,7 +2204,6 @@ MonoBehaviour:
   Parent: {fileID: 593239381}
   Text: {fileID: 811417281}
   Portrait: {fileID: 2058392340}
-  Talking: 0
 --- !u!114 &1285271652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3269,6 +3274,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7283729043449900440, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415830279388841210, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
+      propertyPath: Items.Array.data[0].Amount
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7605721753905106305, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
