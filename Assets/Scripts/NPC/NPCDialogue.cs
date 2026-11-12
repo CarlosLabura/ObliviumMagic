@@ -4,86 +4,99 @@ public class NPCDialogue : MonoBehaviour
 {
     [Header("Dialogue Options")]
     public string DialoguePortrait;
-    [Min(0)] public float TalkSpeed;
-    [Min(0)] public float TalkDelay;
+    [Min(0)] public float TalkSpeed = 0.05f;
+    [Min(0)] public float TalkDelay = 1f;
     [Multiline] public string[] Dialogue;
     [Header("Text Box Objects")]
     [SerializeField] private GameObject Parent;
     [SerializeField] private TextMeshProUGUI Text;
     public Animator Portrait;
-    //variables internas
-    [HideInInspector] public bool Talking = false;
-    private int CurrentText = 0; // numero del texto que se esta escribiendo
-    private int CurrentCharacter = 0; //numero de letra que se tiene que escribir en pantalla
-    private string ActualText; // texto que se esta escribiendo
-    private float TalkTimer = 0; // timer entre cada letra
-    private float DelayTimer = 0; // timer para que pase al siguiente texto
+    private static NPCDialogue ActiveSpeaker; // npc hablando en la caja de texto ahora mismo (compartido entre todos)
+    private int CurrentText = 0;
+    private int CurrentCharacter = 0;
+    private string ActualText = "";
+    private float TalkTimer = 0;
+    private float DelayTimer = 0;
+    private bool Talking = false;
     private NPCRoutine NPCRoutine;
-    private bool Talked = false;
     void Start()
     {
         NPCRoutine = GetComponent<NPCRoutine>();
     }
-    void RestartDialogue()
+    void ResetText()
     {
         CurrentCharacter = 0;
         ActualText = "";
-        Text.SetText(ActualText);
         TalkTimer = 0;
         DelayTimer = 0;
+        Text.SetText(ActualText);
         Portrait.speed = 1f;
     }
-    void SetDialogue(bool Active)
+    void StartDialogue()
     {
-        RestartDialogue();
+        ActiveSpeaker = this;
+        Talking = true;
         CurrentText = 0;
+        Parent.SetActive(true);
         Portrait.Play(DialoguePortrait.ToLower());
+        ResetText();
+    }
+    void StopDialogue()
+    {
+        Talking = false;
+        CurrentText = 0;
+        ResetText();
 
-        Parent.SetActive(Active);
-        Talking = Active;
+        if (ActiveSpeaker == this)
+        {
+            ActiveSpeaker = null;
+            Parent.SetActive(false);
+        }
     }
     void NextDialogue()
     {
-        RestartDialogue();
-        CurrentText += 1;
-
-        if (CurrentText == Dialogue.Length) {
-            SetDialogue(false);
-            Talked = true;
+        CurrentText++;
+        if (CurrentText >= Dialogue.Length)
+        {
+            StopDialogue();
+            return;
         }
+        ResetText();
     }
+
     void Update()
     {
-        //REHACER PARA QUE FUNQUE CON DIFERENTES NPCS
-        //AHORA SE BUGEA Y MUESTRA 2 MENSAJES AL MISMO TIEMPO????
-        //UNITY ESTA GAGA
-        //TEL AVIV NO LES ESTA MANDANDO SUFICIENTES RECURSOS
-        /*
-        if (NPCRoutine.CanSee(NPCRoutine.Target.position) && !Talking && !Talked)
-            SetDialogue(true);
-        else if (!NPCRoutine.CanSee(NPCRoutine.Target.position) && Talking){
-            SetDialogue(false);
-            Talked = false;
+        if (!NPCRoutine.CanSee(NPCRoutine.Target.position))
+        {
+            if (Talking) 
+                StopDialogue();
+            return;
         }
-        */
-
-        if (ActualText == Dialogue[CurrentText])
-        {   
+        if (!Talking)
+        {
+            if (ActiveSpeaker == null)
+                StartDialogue();
+            else
+                return;
+        }
+        
+        string line = Dialogue[CurrentText];
+        if (ActualText.Length >= line.Length)
+        {
             Portrait.speed = 0f;
             DelayTimer += Time.deltaTime;
-            if (DelayTimer < TalkDelay)
-                return;
-            else
+            if (DelayTimer >= TalkDelay)
                 NextDialogue();
+            return;
         }
 
         TalkTimer += Time.deltaTime;
         if (TalkTimer >= TalkSpeed)
         {
             TalkTimer = 0;
-            ActualText += Dialogue[CurrentText][CurrentCharacter];
+            ActualText += line[CurrentCharacter];
             Text.SetText(ActualText);
-            CurrentCharacter += 1;
+            CurrentCharacter++;
         }
     }
 }

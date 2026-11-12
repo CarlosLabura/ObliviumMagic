@@ -2030,6 +2030,7 @@ GameObject:
   - component: {fileID: 1285271649}
   - component: {fileID: 1285271648}
   - component: {fileID: 1285271647}
+  - component: {fileID: 1285271653}
   - component: {fileID: 1285271650}
   - component: {fileID: 1285271652}
   - component: {fileID: 1285271651}
@@ -2173,7 +2174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopActivator
   ShopScript: {fileID: 427268630}
-  Cooldown: 5
   InShop: 0
 --- !u!114 &1285271651
 MonoBehaviour:
@@ -2215,6 +2215,33 @@ MonoBehaviour:
   ShootingDistance: 0
   SightLost: 3
   Target: {fileID: 672573450}
+--- !u!50 &1285271653
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285271646}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1367279251
 GameObject:
   m_ObjectHideFlags: 0
@@ -3344,7 +3371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4334099391649724839, guid: b68b3856a2d24f4498a74b9716b96f16, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.39
+      value: -1.78
       objectReference: {fileID: 0}
     - target: {fileID: 4334099391649724839, guid: b68b3856a2d24f4498a74b9716b96f16, type: 3}
       propertyPath: m_LocalPosition.y
