@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+[RequireComponent(typeof(NPCRoutine))]
 public class NPCDialogue : MonoBehaviour
 {
     [Header("Dialogue Options")]
@@ -19,7 +20,7 @@ public class NPCDialogue : MonoBehaviour
     private float DelayTimer = 0;
     private bool Talking = false;
     private NPCRoutine NPCRoutine;
-    void Start()
+    void Awake()
     {
         NPCRoutine = GetComponent<NPCRoutine>();
     }

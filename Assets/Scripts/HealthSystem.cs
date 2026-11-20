@@ -1,4 +1,6 @@
 using UnityEngine;
+[RequireComponent(typeof(MovementSystem))]
+[RequireComponent(typeof(SpellSystem))]
 public class HealthSystem : MonoBehaviour
 {
     [Header("Health Settings")]
@@ -19,10 +21,13 @@ public class HealthSystem : MonoBehaviour
     private MovementSystem MovementSystem;
     private SpellSystem SpellSystem;
     [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] [SerializeField] private HUDBlood HUDBlood;
-    void Start()
+    void Awake()
     {
         MovementSystem = GetComponent<MovementSystem>();
         SpellSystem = GetComponent<SpellSystem>();
+    }
+    void Start()
+    {
         Health = MaxHealth;
     }
     public void Invencible(float Time)

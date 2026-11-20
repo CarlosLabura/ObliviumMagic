@@ -8,6 +8,8 @@ public struct ShopData
     [Min(0)] public int Amount;
     public Image Image;
 }
+[RequireComponent(typeof(NPCRoutine))]
+[RequireComponent(typeof(NPCDialogue))]
 public class ShopSystem : MonoBehaviour
 {   
     public bool Closed = false;
@@ -15,7 +17,7 @@ public class ShopSystem : MonoBehaviour
     [SerializeField] private ShopHUD ShopScript;
     private NPCRoutine NPCRoutine;
     private NPCDialogue NPCDialogue;
-    void Start()
+    void Awake()
     {
         NPCRoutine = GetComponent<NPCRoutine>();
         NPCDialogue = GetComponent<NPCDialogue>();

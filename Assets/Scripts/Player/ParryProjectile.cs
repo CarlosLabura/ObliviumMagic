@@ -7,9 +7,7 @@ public class ParryProjectile : MonoBehaviour
         {
             other.gameObject.tag = "PlayerHitbox";
 
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0f;
-            Vector2 projectileDirection = (mousePosition - transform.position).normalized;
+            Vector2 projectileDirection = (CursorReplace.GetCursorPosition() - transform.position).normalized;
             
             other.gameObject.GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg;
             other.gameObject.GetComponent<Rigidbody2D>().AddForce(projectileDirection * 20f, ForceMode2D.Impulse);

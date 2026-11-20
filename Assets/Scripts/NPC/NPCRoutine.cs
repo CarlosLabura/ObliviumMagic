@@ -1,5 +1,8 @@
 using UnityEngine;
 public enum NPCState { Patrol, Following, Attacking, Searching, Zombie, Face, Static }
+[RequireComponent(typeof(MovementSystem))]
+[RequireComponent(typeof(SpellSystem))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class NPCRoutine : MonoBehaviour
 {
     public NPCState State = NPCState.Following;
@@ -13,7 +16,7 @@ public class NPCRoutine : MonoBehaviour
     private Rigidbody2D RigidBody2D;
     private SpellSystem SpellSystem;
     private const float ArriveDistance = 0.15f;
-    void Start()
+    void Awake()
     {
         MovementSystem = GetComponent<MovementSystem>();
         SpellSystem = GetComponent<SpellSystem>();

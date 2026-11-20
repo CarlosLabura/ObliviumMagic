@@ -7,6 +7,7 @@ public struct SpellData
     public bool Unlocked;
     public Image SpellBox;
 }
+[RequireComponent(typeof(MovementSystem))]
 public class SpellSystem : MonoBehaviour
 {
     //hechizos
@@ -18,7 +19,7 @@ public class SpellSystem : MonoBehaviour
     private int SpellCycle = 1; //empieza en uno para hacer que no se elijan los fist
     private float FistTime = 0f;
     //variables internas
-    [SerializeField] private GameObject Projectile;
+    public GameObject Projectile;
     [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] public SpellData[] PlayerSpells;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private GameObject FistHitbox;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private CursorReplace CursorReplace;
@@ -27,7 +28,7 @@ public class SpellSystem : MonoBehaviour
     {
         return CursorReplace.GetCursorPosition();
     }
-    void Start()
+    void Awake()
     {
         MovementSystem = GetComponent<MovementSystem>();
     }

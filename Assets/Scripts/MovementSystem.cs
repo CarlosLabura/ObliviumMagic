@@ -1,4 +1,5 @@
 using UnityEngine;
+[RequireComponent(typeof(Rigidbody2D))]
 public class MovementSystem : MonoBehaviour
 {
     public bool Player = false;
@@ -21,16 +22,20 @@ public class MovementSystem : MonoBehaviour
     [HideInInspector] public bool IsStunned = false;
     private float StunTimer = 0f;
     // camara
-    [ShowIf("Player")] [Header("Player Settings")]
+    [ShowIf("Player")] [Header("Camera Settings")]
     [Min(0)] public float CameraSensivility = 1f;
+    static public Camera PlayerCamera;
     private float CameraSpeed = 5f;
     //variables internas
     private Rigidbody2D RigidBody2D;
-    private SpellSystem SpellSystem;
+    void Awake()
+    {
+        RigidBody2D = GetComponent<Rigidbody2D>();
+    }
     void Start()
     {
-        SpellSystem = GetComponent<SpellSystem>();
-        RigidBody2D = GetComponent<Rigidbody2D>();
+        if (PlayerCamera == null)
+            PlayerCamera = Camera.main;
     }
     public void Freeze(float Time)
     {
@@ -51,15 +56,15 @@ public class MovementSystem : MonoBehaviour
     void Update()
     {
         if (Player){ 
-            Vector3 mousePosition = SpellSystem.GetCursorPosition();
+            Vector3 mousePosition = CursorReplace.GetCursorPosition();
             
             Vector3 target = new Vector3(
                 transform.position.x + (transform.position.x + mousePosition.x) * 0.5f / CameraSensivility,
                 transform.position.y + (transform.position.y + mousePosition.y) * 0.5f / CameraSensivility,
-                Camera.main.transform.position.z
+                PlayerCamera.transform.position.z
             );
 
-            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, target, Time.deltaTime * CameraSpeed);
+            PlayerCamera.transform.position = Vector3.Lerp(PlayerCamera.transform.position, target, Time.deltaTime * CameraSpeed);
             
             Vector2 rotationDirection = (mousePosition - transform.position).normalized;
             RigidBody2D.rotation = Mathf.Atan2(rotationDirection.y, rotationDirection.x) * Mathf.Rad2Deg -90f;

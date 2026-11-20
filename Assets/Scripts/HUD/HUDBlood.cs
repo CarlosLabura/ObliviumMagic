@@ -1,17 +1,21 @@
 using UnityEngine.UI;
 using UnityEngine;
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Image))]
 public class HUDBlood : MonoBehaviour
 {
     [SerializeField] private Animator BloodBall;
     [HideInInspector] public float Health = 1f;
     private Animator Animator;
     private Image Image;
-    void Start()
+    void Awake()
     {
         Animator = GetComponent<Animator>();
-        Animator.Play("Blood");
-
         Image = GetComponent<Image>();
+    }
+    void Start()
+    {
+        Animator.Play("Blood");
     }
     public void SetHealth(float healthAmount)
     {

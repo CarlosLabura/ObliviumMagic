@@ -1,11 +1,15 @@
 using UnityEngine;
+[RequireComponent(typeof(Animator))]
 public class CursorReplace : MonoBehaviour
 {
     private Animator Animator;
+    void Awake()
+    {
+        Animator = GetComponent<Animator>();
+    }
     void Start()
     {
         Cursor.visible = false;
-        Animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -19,9 +23,9 @@ public class CursorReplace : MonoBehaviour
     {
         Animator.Play(Type.ToString());
     }
-    public Vector3 GetCursorPosition()
+    static public Vector3 GetCursorPosition()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = MovementSystem.PlayerCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
         return mousePosition;
     }
