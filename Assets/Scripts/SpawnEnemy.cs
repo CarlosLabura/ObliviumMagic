@@ -1,11 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
 public class SpawnEnemy : MonoBehaviour
 {
     public int MaxEnemiesAlive = 10;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Enemy;
-    private int EnemyCount = 0;
     private SpellType[] EnemyTypes = {SpellType.Rock, SpellType.Fire, SpellType.Ice, SpellType.Ray};
+    private List<GameObject> Enemies = new List<GameObject>();
     public Vector2 GetRandomPositionOutsideCamera()
     {
         Camera cam = MovementSystem.PlayerCamera;
@@ -30,8 +31,9 @@ public class SpawnEnemy : MonoBehaviour
     }
     void Update()
     {
-        if (EnemyCount < MaxEnemiesAlive){
-            EnemyCount += 1;
+        Enemies.RemoveAll(enemy => enemy == null);
+
+        if (Enemies.Count < MaxEnemiesAlive){
             GameObject NewEnemy = Instantiate(Enemy, GetRandomPositionOutsideCamera(), Quaternion.identity);
             SpellType EnemyType = EnemyTypes[Random.Range(0, EnemyTypes.Length)];
             NewEnemy.GetComponent<HealthSystem>().Weakness = EnemyType;
@@ -58,6 +60,7 @@ public class SpawnEnemy : MonoBehaviour
             NewEnemy.GetComponent<NPCRoutine>().State = NPCState.Zombie;
             NewEnemy.GetComponent<NPCRoutine>().SightLost = 99;
             NewEnemy.GetComponent<NPCRoutine>().Target = Player.transform;
+            Enemies.Add(NewEnemy);
         }
     }
 }
