@@ -7,7 +7,6 @@ public struct SpellData
     public bool Unlocked;
     public Image SpellBox;
 }
-[RequireComponent(typeof(MovementSystem))]
 public class SpellSystem : MonoBehaviour
 {
     //hechizos

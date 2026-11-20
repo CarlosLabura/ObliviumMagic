@@ -1,6 +1,4 @@
 using UnityEngine;
-[RequireComponent(typeof(MovementSystem))]
-[RequireComponent(typeof(SpellSystem))]
 public class HealthSystem : MonoBehaviour
 {
     [Header("Health Settings")]

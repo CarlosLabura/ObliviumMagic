@@ -1,7 +1,5 @@
 using UnityEngine;
 public enum NPCState { Patrol, Following, Attacking, Searching, Zombie, Face, Static }
-[RequireComponent(typeof(MovementSystem))]
-[RequireComponent(typeof(SpellSystem))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class NPCRoutine : MonoBehaviour
 {
@@ -20,6 +18,7 @@ public class NPCRoutine : MonoBehaviour
     {
         MovementSystem = GetComponent<MovementSystem>();
         SpellSystem = GetComponent<SpellSystem>();
+
         RigidBody2D = GetComponent<Rigidbody2D>();
     }
     public void Rotate(Vector3 position)
