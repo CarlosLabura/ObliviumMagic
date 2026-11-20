@@ -64,7 +64,6 @@ public class NPCDialogue : MonoBehaviour
         }
         ResetText();
     }
-
     void Update()
     {
         if (!NPCRoutine.CanSee(NPCRoutine.Target.position))
