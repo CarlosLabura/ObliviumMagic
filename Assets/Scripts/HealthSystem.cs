@@ -17,12 +17,10 @@ public class HealthSystem : MonoBehaviour
     private float InvencibleTimer = 0f;
     // variables internas
     private MovementSystem MovementSystem;
-    private SpellSystem SpellSystem;
     [ShowIf(typeof(MovementSystem), "Player")] [Header("Player Settings")] [SerializeField] private HUDBlood HUDBlood;
     void Awake()
     {
         MovementSystem = GetComponent<MovementSystem>();
-        SpellSystem = GetComponent<SpellSystem>();
     }
     void Start()
     {
@@ -43,7 +41,7 @@ public class HealthSystem : MonoBehaviour
             HUDBlood.SetHealth((float)Health / MaxHealth);
             if (Knockback) {
                 Invencible(1);
-                MovementSystem.Knockback(SpellSystem.GetCursorPosition(), 2);
+                MovementSystem.Knockback(CursorReplace.GetCursorPosition(), 2);
             }
         }
         if (Health <= 0)

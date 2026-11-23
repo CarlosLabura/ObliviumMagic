@@ -23,21 +23,16 @@ public class SpellSystem : MonoBehaviour
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private GameObject FistHitbox;
     [ShowIf(typeof(MovementSystem), "Player")] [SerializeField] private CursorReplace CursorReplace;
     private MovementSystem MovementSystem;
-    public Vector3 GetCursorPosition()
-    {
-        return CursorReplace.GetCursorPosition();
-    }
     void Awake()
     {
         MovementSystem = GetComponent<MovementSystem>();
     }
-    private void Spell(SpellType Type, float Speed, Vector3 Scale, Vector3 Target)
+    private void Spell(SpellType Type, float Speed, Vector3 Target)
     {
         GameObject projectile = Instantiate(Projectile, transform.position, Quaternion.identity);
         projectile.GetComponent<SpellTypeScript>().Type = Type;
-        projectile.transform.localScale = Scale;
         Vector2 projectileDirection = (Target - transform.position).normalized;
-        projectile.GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg;
+        projectile.GetComponent<Rigidbody2D>().rotation = Mathf.Atan2(projectileDirection.y, projectileDirection.x) * Mathf.Rad2Deg - 90f;
         projectile.GetComponent<Rigidbody2D>().AddForce(projectileDirection * Speed, ForceMode2D.Impulse);
         Destroy(projectile, 5f);
     }
@@ -56,19 +51,19 @@ public class SpellSystem : MonoBehaviour
                 }
                 break;
             case SpellType.Rock:
-                Spell(SpellType.Rock, 10f, new Vector3(0.9f,0.7f,0.7f), Target);
+                Spell(SpellType.Rock, 10f, Target);
                 Cooldown = SpellCooldown; //por decision popular todos los hechizos van a tener el mismo cooldown
                 break;
             case SpellType.Fire:
-                Spell(SpellType.Fire, 15f, new Vector3(1f,0.5f,0.5f), Target);
+                Spell(SpellType.Fire, 15f, Target);
                 Cooldown = SpellCooldown; //por comodidad lo voy a dejar asi por si dsp lo quieren cambiar
                 break;
             case SpellType.Ice:
-                Spell(SpellType.Ice, 12f, new Vector3(0.7f,0.7f,0.7f), Target);
+                Spell(SpellType.Ice, 12f, Target);
                 Cooldown = SpellCooldown;
                 break;
             case SpellType.Ray:
-                Spell(SpellType.Ray, 20f, new Vector3(0.9f,0.4f,0.4f), Target);
+                Spell(SpellType.Ray, 20f, Target);
                 Cooldown = SpellCooldown;
                 break;
             default:
@@ -91,18 +86,14 @@ public class SpellSystem : MonoBehaviour
             FistHitbox.SetActive(false);
     
         if (Input.GetMouseButton(0))
-        {
-            CastSpell(CurrentSpell, GetCursorPosition());
-        }
+            CastSpell(CurrentSpell, CursorReplace.GetCursorPosition());
 
         if (PlayerSpells.Length <= 1)
             return;
 
         // cambio de hechizos
         if (Input.GetKeyDown(KeyCode.Q))
-        {
             ChangeSpell(0); //0 deberian ser los puños
-        }
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.R))
         {
             SpellCycle += 1;
