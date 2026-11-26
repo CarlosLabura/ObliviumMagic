@@ -357,7 +357,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.7264151, g: 0.66548485, b: 0.5379584, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1943,6 +1943,10 @@ PrefabInstance:
       propertyPath: PlayerSpells.Array.data[4].SpellBox
       value: 
       objectReference: {fileID: 1494733223}
+    - target: {fileID: 4603437217764618328, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
+      propertyPath: PlayerSpells.Array.data[4].Unlocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7283729043449900440, guid: 9a4fc22349811c94c847ff4370b8ae52, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

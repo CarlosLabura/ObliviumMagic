@@ -5,7 +5,7 @@ public class SpawnEnemy : MonoBehaviour
     public int MaxEnemiesAlive = 10;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Enemy;
-    private SpellType[] EnemyTypes = {SpellType.Rock, SpellType.Fire, SpellType.Ice, SpellType.Ray};
+    private SpellType[] EnemyTypes = {SpellType.Rock, SpellType.Fire, SpellType.Ice};
     private List<GameObject> Enemies = new List<GameObject>();
     public Vector2 GetRandomPositionOutsideCamera()
     {
